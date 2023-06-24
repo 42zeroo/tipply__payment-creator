@@ -44,11 +44,11 @@ export const App = () => {
             onSubmit={handleSubmit}
             validationSchema={toFormikValidationSchema(PaymentCreatorSchema)}
             initialValues={{
-              message: 'mess',
-              email: 'email@test.pl',
-              nickname: 'test',
+              message: '',
+              email: '',
+              nickname: '',
 
-              price: '10.00',
+              price: '',
               payment_method: '',
               where_tip_goes: streamerProfileData?.whereTipsGoes ? '' : 'UNAVAILABLE',
               
