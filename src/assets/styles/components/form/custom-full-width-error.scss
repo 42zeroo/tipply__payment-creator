@@ -1,0 +1,34 @@
+.custom-full-width-error {
+  margin-top: 0;
+  height: 1px;
+  transition-property: height, opacity;
+  transition: 0.4s ease-in-out;
+  opacity: 0;
+
+  p {
+    height: 50%;
+    margin: 0;
+    background: rgba(255, 100, 100, 0.15);
+    border: 1px solid #ff6464;
+    border-radius: 7px;
+    width: 100%;
+    color: #ff6464;
+    text-align: center;
+    padding: 12px 14px;
+    
+    @include respond-to('mobile') {
+      padding: 12px 44px;
+
+    }
+  }
+
+  &--active {
+    margin-top: 32px;
+    height: 40.33px;
+    opacity: 1;
+
+    p {
+      height: 100%;
+    }
+  }
+}

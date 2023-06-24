@@ -1,0 +1,91 @@
+.multi-switch {
+  
+  &-container {
+    display: inline-block;
+    height: 30px;
+    padding: 2px;
+    border-radius: 2px;
+    width: 200px;
+    margin: 0 auto;
+    border-radius: 30px;
+    position: relative;
+    display: flex;
+    width: 750px;
+    border-width: 0.1rem;
+    border-color: black;
+    height: 50px;
+    margin-top: 30px;
+    text-align: center;
+
+    button {
+      padding: 5px 22px;
+      background: transparent;
+      color: #ABABAB;
+      transition: color 0.2s ease-in-out;
+  
+      &:disabled {
+        background-color: transparent;
+  
+        &:hover {
+          color: #ABABAB;
+        }
+      }
+
+      &:hover {
+        animation: unset !important;
+      }
+  
+      &:not(:disabled) {
+        &:hover {
+          color: $white;
+        }
+      }
+    }
+  
+  }
+  &-content {
+    float: left;
+    width: 50%;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 30px;
+    color: #000;
+    text-align: center;
+    cursor: pointer;
+    position: inherit;
+    z-index: 10;
+    transition: color 0.75s cubic-bezier(0, 1, 0, 0);
+    will-change: transform;
+    animation: switch-handle-color 0.5s;
+  }
+
+  &-handle {
+    position: absolute;
+    float: left;
+    height: 30px;
+    width: 50%;
+    font-size: 12px;
+    
+    line-height: 30px;
+    cursor: pointer;
+    background-color: $userColor !important;
+    border-radius: 30px;
+    top: 50%;
+    transform: translateY(-50%) translateX(-1px);
+    transition: left 0.5s ease-in-out;
+    will-change: transform;
+    animation: switch-handle-move 0.5s;
+  }
+
+  @keyframes switch-handle-move {
+    0% {
+      left: 2px;
+    }
+  }
+
+  @keyframes switch-handle-color {
+    0% {
+      color: white;
+    }
+  }
+}

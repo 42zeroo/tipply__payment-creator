@@ -1,0 +1,60 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+
+  padding: 0;
+  margin: 0;
+
+  font-style: 16px;
+  font-stretch: normal;
+
+  color: $white;
+}
+
+
+button,
+input,
+select,
+textarea {
+  &:focus,
+  &:hover {
+    outline: none;
+  }
+
+  cursor: pointer;
+}
+
+button[data-rmiz-btn-close] {
+  &:hover {
+    background: transparent;
+  }
+}
+
+img[src='.svg'] {
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+img {
+  image-rendering: auto;
+  user-select: none;
+}
+
+@supports (-moz-appearance: none) {
+  img[src='.svg'] {
+    image-rendering: auto;
+  }
+  img {
+    image-rendering: auto;
+  }
+}
+
+svg {
+  max-width: 100%;
+}

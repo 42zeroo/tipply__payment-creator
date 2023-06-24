@@ -1,0 +1,65 @@
+.checkbox {
+  transition: color 0.2s ease-in-out;
+  label {
+    display: flex;
+    padding-bottom: 9px;
+    position: relative;
+    padding-left: 25px; /* Adjust as needed */
+    cursor: pointer;
+  }
+
+  input {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+  }
+
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 19px;
+    height: 19px;
+    border: 1px solid $hardBrown;
+    border-radius: 4px;
+    transition: border-color 0.3s ease, background-color 0.2s ease-in;
+  }
+
+  .label {
+    padding-left: 17px;
+  }
+
+  input:checked ~ .checkmark {
+    background-color: $userColor;
+    border-color: $white; /* Customize the background color when checked */
+  }
+
+  .checkmark:after {
+    content: '';
+    position: absolute;
+    background-image: url(/src/assets/icons/check.svg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    width: 11px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 8.173px;
+    opacity: 0;
+  }
+
+  input:checked ~ .checkmark:after {
+    opacity: 1; /* Show the checkmark when checked */
+  }
+
+  &__error {
+    border-color: $red;
+    color: $red;
+
+    .checkmark {
+      border-color: $red;
+    }
+  }
+}

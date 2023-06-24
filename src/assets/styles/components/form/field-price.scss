@@ -1,0 +1,51 @@
+.field-price {
+  &__wrapper {
+    padding: 0 19px;
+    position: relative;
+    
+    input {
+      font-size: 14px;
+      
+      @include respond-to('mobile') {
+        font-size: 18px;
+      }
+    }
+
+    &--additional-fee {
+      input {
+        padding-bottom: 22px;
+        font-size: 14px;
+        
+        @include respond-to('mobile') {
+          font-size: 18px;
+          padding-bottom: 30px;
+        }
+      }
+      
+      .field-price__tax {
+        bottom: 5px;
+        
+        
+        @include respond-to('mobile') {
+          bottom: 10px;
+        }
+      }
+    }
+  }
+
+  &__tax {
+    font-weight: 600;
+    font-size: 8px;
+    line-height: 13px;
+    color: #2bd283;
+    position: absolute;
+    bottom: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    
+    @include respond-to('mobile') {
+      font-size: 10px;
+      // padding-bottom: 30px;
+    }
+  }
+}

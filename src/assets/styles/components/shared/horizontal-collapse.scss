@@ -1,0 +1,16 @@
+.horizontal-collapse {
+  overflow-x: auto;
+  white-space: nowrap;
+  -ms-overflow-style: none;
+  position: relative;
+
+  &::-webkit-scrollbar,
+  &::-moz-scrollbar {
+    display: none !important;
+  }
+
+  &::-webkit-scrollbar {
+    width: 0 !important;
+    height: 0 !important;
+  }
+}

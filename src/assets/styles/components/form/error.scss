@@ -1,0 +1,41 @@
+.popover-arrow {
+  border-color: transparent !important;
+  bottom: -10px !important;
+}
+
+.form-error {
+  &__triangle {
+    position: absolute;
+    right: 32px;
+    cursor: pointer;
+
+    top: calc(50% + 23px);
+    transform: translateY(-50%);
+    opacity: 0;
+
+    @include respond-to('mobile') {
+      top: calc(50% + 57px  / 2);
+    }
+
+    &--show {
+      opacity: 1;
+    }
+  }
+
+  &__wrapper {
+    padding: 8px 17.6px;
+    border-radius: 8.8px;
+    color: $red;
+    border: 1px solid transparent;
+    background: rgba(24, 25, 26, 0.9);
+    border-color: $red;
+  }
+}
+
+.xd {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  z-index: 22;
+  user-select: auto;
+}

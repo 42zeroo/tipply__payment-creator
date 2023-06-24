@@ -1,0 +1,35 @@
+.field-wrapper {
+  position: relative;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+
+  &__error-wrapper {
+    position: relative;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+
+    &__container {
+      z-index: 999;
+    }
+  }
+
+  &__label {
+    padding-left: 30px;
+    font-size: 10px;
+    line-height: 13px;
+    padding-top: 25.008px;
+    padding-bottom: 8px;
+    
+    @include respond-to('mobile') {
+      font-size: 12px;
+      line-height: 15.008px;
+      padding-top: 30px;
+      padding-bottom: 12px;
+      font-size: 12px;
+      line-height: 15px;
+      padding-left: 42px;
+    }
+  }
+}

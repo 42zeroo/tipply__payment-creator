@@ -1,0 +1,35 @@
+.creator-message-view {
+  &__container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__button-wrapper {
+    width: 100%;
+    padding-top: 30px;
+
+    @include respond-to('mobile') {
+      padding-top: 26px;
+    }
+
+    button {
+      width: 100%;
+    }
+  }
+
+  &__streamer-profile-info-description {
+    text-align: center;
+    margin: 0 auto;
+    max-width: 215px;
+
+    @include respond-to('mobile') {
+      max-width: 264px;
+    }
+  }
+
+  &__streamer-tips {
+    display: grid;
+    place-items: center;
+    padding-bottom: 30px;
+  }
+}

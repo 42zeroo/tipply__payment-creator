@@ -1,0 +1,35 @@
+@font-face {
+  font-family: 'Gilroy';
+  src: url(../fonts/Gilroy-ExtraBold.otf) format('opentype')
+}
+
+@font-face {
+  font-family: 'Sora';
+  src: url(../fonts/Sora-VariableFont_wght.ttf) format('truetype')
+}
+
+@font-face {
+  font-family: 'Campton';
+  src: url(../fonts/CamptonBold.otf) format('opentype')
+}
+
+* {
+  font-family: 'Sora', sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+
+  @include respond-to('mobile') {
+    font-size: 14px;
+    line-height: 18px;
+  }
+}
+
+a {
+  color: $userColor;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

@@ -1,0 +1,37 @@
+@mixin respond-to($breakpoint) {
+  // If the key exists in the map
+  @if map-has-key($breakpoints, $breakpoint) {
+    // Prints a media query based on the value
+    @media (min-width: map-get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  }
+
+    // If the key doesn't exist in the map
+  @else {
+    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+        + "Available breakpoints are: #{map-keys($breakpoints)}.";
+  }
+}
+
+@mixin pulse($r, $g, $b) {
+  $id: unique_id();
+
+	box-shadow: 0 0 0 0 rgba(#{$r}, #{$g}, #{$b}, 1);
+	transform: scale(1);
+	animation: pulsergb#{$id} 2s infinite;
+
+  @keyframes pulsergb#{$id} {
+    0% {
+      box-shadow: 0 0 0 0 rgba(#{$r}, #{$g}, #{$b}, 0.7);
+    }
+  
+    70% {
+      box-shadow: 0 0 0 20px rgba(#{$r}, #{$g}, #{$b}, 0);
+    }
+  
+    100% {
+      box-shadow: 0 0 0 0 rgba(#{$r}, #{$g}, #{$b}, 0);
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "extends": ["plugin:@nx/react"],
+  "root": true,
+  "ignorePatterns": ["!**/*"],
+  "plugins": ["@nx"],
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "extends": ["plugin:@nx/typescript"],
+      "rules": {
+        "react-hooks/exhaustive-deps": "off"
+      }
+    },
+    {
+      "files": ["*.js", "*.jsx"],
+      "extends": ["plugin:@nx/javascript"],
+      "rules": {}
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+// COLORS
+$white: #FFFFFF;
+$black: #000000;
+$red: #FF6464;
+$green: rgb(43,210,131);
+$userColor: var(--user-color, $green);
+$lightGray: #ADADAD;
+$gray: #414141;
+$hardBrown: #464646;
+$darkGray: rgba(24, 25, 26, 0);
+$backgroundColor: #18191A;
+
+
+// GRADIENTS
+$gradientLightGrayToGray: linear-gradient(180deg, $gray 0%, $darkGray 100%);
+$gradientForPageContainer: linear-gradient(180deg, rgba(65, 65, 65, 0.80) 0%, rgba(46, 46, 46, 0.80) 0.01%, rgba(24, 25, 26, 0.00) 100%);
+
+// BREAKPOINTS
+$breakpoints: (
+  'mobile': 768px,
+  'laptop': 1280px
+);
