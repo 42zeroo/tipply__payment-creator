@@ -95,7 +95,7 @@ const TESTER_DATA = {
 };
 
 const MICHAL_DATA = {
-  userColor: {r: 251, g: 206, b: 177},
+  userColor: { r: 251, g: 206, b: 177 },
   name: 'Michał Włodarczyk',
   description: 'Siema jestem Michal Włodarczyk i jestem z Łodzi.',
   avatarUrl:
@@ -112,7 +112,7 @@ export class StreamerDataAPI {
   private static mockRecords = sampleSize(MOCK_STREAMER_TIPS, 10);
 
   public static async getStreamerProfile(
-    profileName: string
+    profileName = 'zairox'
   ): Promise<StreamerProfile> {
     await sleep(1000);
 
@@ -124,7 +124,10 @@ export class StreamerDataAPI {
       return TESTER_DATA;
     }
 
-    if (profileName.toLowerCase() === 'Micha%C5%82%20W%C5%82odarczyk'.toLowerCase()) {
+    if (
+      profileName.toLowerCase() ===
+      'Micha%C5%82%20W%C5%82odarczyk'.toLowerCase()
+    ) {
       return MICHAL_DATA;
     }
 
