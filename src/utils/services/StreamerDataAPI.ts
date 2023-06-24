@@ -115,6 +115,7 @@ export class StreamerDataAPI {
     profileName = 'zairox'
   ): Promise<StreamerProfile> {
     await sleep(1000);
+    return ZAIROX_DATA;
 
     if (profileName.toLowerCase() === 'zairox') {
       return ZAIROX_DATA;
