@@ -21,6 +21,7 @@
     line-height: 13px;
     padding-top: 25.008px;
     padding-bottom: 8px;
+    font-weight: 800;
     
     @include respond-to('mobile') {
       font-size: 12px;

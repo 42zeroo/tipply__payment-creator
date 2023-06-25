@@ -6,6 +6,7 @@ import SwitchTransition from 'react-transition-group/SwitchTransition';
 import playIcon from 'src/assets/icons/play.svg';
 import recordIcon from 'src/assets/icons/record.svg';
 import stopIcon from 'src/assets/icons/stop.svg';
+import { sleep } from 'src/utils/helpers/sleep';
 
 interface RecorderProps {
   name: string;
@@ -97,8 +98,25 @@ export const Recorder = ({ disabled, name }: RecorderProps) => {
     }
   }, [audioSrc, elapsedTime, startRef, audioElementRef]);
 
+  const [disabledRecordAnimation, setDisabledRecordAnimation] = useState(false);
+
   const startRecording = useCallback(async () => {
+    if (disabledRecordAnimation) {
+      return;
+    }
+
     setError(false);
+
+    if (disabled) {
+      setDisabledRecordAnimation(true);
+
+      await sleep(1000);
+
+      setDisabledRecordAnimation(false);
+
+      return;
+    }
+
     try {
       const audioStream = await navigator.mediaDevices.getUserMedia({
         audio: true,
@@ -130,7 +148,7 @@ export const Recorder = ({ disabled, name }: RecorderProps) => {
     } catch (error) {
       setError(true);
     }
-  }, [blobToBase64String, setValue]);
+  }, [blobToBase64String, setValue, disabledRecordAnimation]);
 
   const removeRecord = useCallback(() => {
     setAudioSrc('');
@@ -219,7 +237,11 @@ export const Recorder = ({ disabled, name }: RecorderProps) => {
                 ref={nodeRef}
                 className={classNames(
                   `recorder__description__state--${recordingState}`,
-                  ' '
+                  '',
+                  {
+                    'recorder__description__state--shake':
+                      disabledRecordAnimation,
+                  }
                 )}
               >
                 {renderRecordingState()}
@@ -229,7 +251,7 @@ export const Recorder = ({ disabled, name }: RecorderProps) => {
         </div>
       </div>
     ),
-    [renderRecordingState, nodeRef, recordingState]
+    [renderRecordingState, nodeRef, recordingState, disabledRecordAnimation]
   );
 
   const renderButtons = useCallback(() => {
@@ -276,15 +298,13 @@ export const Recorder = ({ disabled, name }: RecorderProps) => {
           <button
             type="button"
             onClick={startRecording}
-            disabled={
-              disabled ||
-              recording ||
-              (isFinite(elapsedTime) && elapsedTime > 0)
-            }
+            disabled={recording || (isFinite(elapsedTime) && elapsedTime > 0)}
             className={classNames(
               'recorder__button',
               'recorder__button--record',
               {
+                'recorder__button--pulse':
+                  disabledRecordAnimation,
                 'recorder__button--recording': recording,
               }
             )}

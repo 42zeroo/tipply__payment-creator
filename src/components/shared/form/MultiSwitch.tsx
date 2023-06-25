@@ -64,8 +64,8 @@ export const MultiSwitch: React.FC<MultiSwitchProps> = ({
           onToggle(e);
         }}
         small
-        className={classNames(classSwitchContent, {
-          'switch-button--is-active': activeIndex === index,
+        className={classNames(classSwitchContent, 'multi-switch__button', {
+          'multi-switch__button--is-active': activeIndex === index,
         })}
         type="button"
       >

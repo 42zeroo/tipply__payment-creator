@@ -32,12 +32,12 @@ export const PredefinedPriceSwiperComponent = ({
           onClick();
         }
 
-        if (priceFieldValue !== price.toFixed(2)) {
-          setPriceFieldValue(price.toFixed(2));
+        if (priceFieldValue !== price.toFixed(2).replace('.', ',')) {
+          setPriceFieldValue(price.toFixed(2).replace('.', ','));
         }
 
         if (isActive) {
-          setPriceFieldValue(price.toFixed(2));
+          setPriceFieldValue(price.toFixed(2).replace('.', ','));
         }
 
         const slideIndexOfClickedPredefinedPrice = findIndex(

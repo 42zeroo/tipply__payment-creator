@@ -8,10 +8,14 @@
     position: absolute;
     right: 32px;
     cursor: pointer;
-
     top: calc(50% + 23px);
     transform: translateY(-50%);
     opacity: 0;
+
+    img {
+      width: 17.364px;
+      height: 15px;
+    }
 
     @include respond-to('mobile') {
       top: calc(50% + 57px  / 2);
@@ -19,6 +23,25 @@
 
     &--show {
       opacity: 1;
+    }
+
+    &--textarea {
+      top: 83px !important;
+      transform: translateY(0) !important;
+    }
+
+    &--checkbox {
+      transform: translateY(0) translateX(0);
+      left: 1px;
+      z-index: 2;
+      right: unset;
+      top: 25px;
+
+      @include respond-to('mobile') {
+        left: -30px;
+        right: unset;
+        top: 2px;
+      }
     }
   }
 
@@ -29,6 +52,21 @@
     border: 1px solid transparent;
     background: rgba(24, 25, 26, 0.9);
     border-color: $red;
+    
+    &--grey {
+      padding: 8px 17.6px;
+      border-radius: 8.8px;
+      margin-bottom: -5px;
+      color: #ADADAD;
+      border: 1px solid transparent;
+      background: rgba(24, 25, 26, 0.9);
+      border-color: $hardBrown;
+
+      p {
+        margin: 0;
+        padding: 0;
+      }
+    }
   }
 }
 

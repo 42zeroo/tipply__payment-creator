@@ -19,7 +19,7 @@ export const LastStreamerTip: React.FC<LastTipProps> = ({
       })}
     >
       <span>{nickname}</span>
-      <span>{tip.toFixed(2)} PLN</span>
+      <span>{tip.toFixed(2).replace('.', ',')} PLN</span>
     </div>
   );
 };

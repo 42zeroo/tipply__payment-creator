@@ -6,6 +6,7 @@ type PaymentMethodProps = {
   image?: string | unknown;
   text?: string | unknown;
   isActive: boolean;
+  isZen?: boolean;
   onClick: () => void;
 };
 
@@ -14,12 +15,14 @@ export const PaymentMethod: React.FC<PaymentMethodProps> = ({
   image,
   text,
   isActive,
+  isZen,
   onClick,
 }) => {
   return (
     <button
       className={classNames('creator-payment-view__payment-method', {
         'creator-payment-view__payment-method--active': isActive,
+        'creator-payment-view__payment-method--zen': isZen,
       })}
       type="button"
       onClick={onClick}

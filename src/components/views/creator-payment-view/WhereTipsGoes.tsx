@@ -1,7 +1,7 @@
-import React, { useMemo } from 'react';
 import classNames from 'classnames';
 import { useField } from 'formik';
-import CountUp, { useCountUp } from 'react-countup';
+import React, { useMemo } from 'react';
+import CountUp from 'react-countup';
 
 interface WhereTipGoesProps {
   name: string;
@@ -57,6 +57,7 @@ export const WhereTipGoes: React.FC<WhereTipGoesProps> = ({
         <p>{name}</p>
         <p>
           <CountUp
+            
             start={actualTipValue}
             end={
               isActive && parseFloat(field.value) > 0
@@ -64,12 +65,13 @@ export const WhereTipGoes: React.FC<WhereTipGoesProps> = ({
                 : actualTipValue
             }
             decimals={2}
-            decimal="."
+            separator='.'
+            decimal=","
             suffix="zł"
           >
             {({ countUpRef }) => <span ref={countUpRef} />}
           </CountUp>
-          <span> / {limit.toFixed(2)}zł</span>
+          <span> / {limit.toFixed(2).replace('.', ',')}zł</span>
         </p>
       </div>
       <p className="where-payment-goes__percent">
@@ -82,7 +84,7 @@ export const WhereTipGoes: React.FC<WhereTipGoesProps> = ({
           }
           decimals={2}
           decimal="."
-          suffix=" %"
+          suffix="%"
         >
           {({ countUpRef }) => <span ref={countUpRef} />}
         </CountUp>

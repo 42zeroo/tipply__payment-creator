@@ -1,5 +1,4 @@
-import { useFormikContext } from 'formik';
-import { useCallback, useMemo, useRef, useState } from 'react';
+import { useCallback, useRef } from 'react';
 import arrowRight from 'src/assets/icons/arrow-right.svg';
 import mailIcon from 'src/assets/icons/mail.svg';
 import { Button } from 'src/components/shared/Button';
@@ -8,7 +7,6 @@ import { Input } from 'src/components/shared/form/Input';
 import { Textarea } from 'src/components/shared/form/Textarea';
 import { usePaymentCreatorContext } from 'src/utils/hooks/usePaymentCreatorContext';
 import { useScrollIntoElement } from 'src/utils/hooks/useScrollIntoElement';
-import { Popover, ArrowContainer } from 'react-tiny-popover';
 
 export const CreatorMessageView = () => {
   const { streamerProfile, changeCreatorStep, creatorStep } =
@@ -29,8 +27,6 @@ export const CreatorMessageView = () => {
   const goToCreatorStreamerTips = useCallback(() => {
     changeCreatorStep('CreatorStreamerTips', false);
   }, [changeCreatorStep]);
-  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
-
 
   return (
     <div className="creator-message-view__container" ref={containerRef}>
@@ -40,6 +36,7 @@ export const CreatorMessageView = () => {
             small
             semiTransparent
             iconLeft={mailIcon}
+            showIconOnlyOnHover={false}
             type="button"
             onClick={goToCreatorStreamerTips}
           >
@@ -59,15 +56,15 @@ export const CreatorMessageView = () => {
       </div>
 
       <FieldWrapper label="TWÓJ NICKNAME" name='nickname'>
-        <Input name="nickname" />
+        <Input name="nickname" placeholder='Wpisz swój nick'/>
       </FieldWrapper>
 
       <FieldWrapper label="TWÓJ ADRES E-MAIL" name='email'>
-        <Input name="email" type="email" />
+        <Input name="email" type="email" placeholder='Wpisz adres email'/>
       </FieldWrapper>
 
-      <FieldWrapper label="TREŚĆ WIADOMOŚCI DO STREAMERA" name='message'>
-        <Textarea maxLength={255} name="message" />
+      <FieldWrapper label="TREŚĆ WIADOMOŚCI DO STREAMERA" name='message' textarea>
+        <Textarea maxLength={255} name="message" placeholder='Wpisz wiadomość...'/>
       </FieldWrapper>
 
       <div className="creator-message-view__button-wrapper">

@@ -49,7 +49,7 @@ const PriceField: React.FC<PriceFieldProps> = ({
   );
 
   const smsPlusAmountValue = useMemo(() => {
-    const smsPlusAmount = calculateSMSFullAmount(parseFloat(field.value)).toFixed(2);
+    const smsPlusAmount = calculateSMSFullAmount(parseFloat(field.value)).toFixed(2).replace('.', ',');
 
     if (isNaN(parseFloat(smsPlusAmount))) {
       return '0,00'
@@ -73,7 +73,7 @@ const PriceField: React.FC<PriceFieldProps> = ({
         onValueChange={handleValueChange}
         placeholder="0 PLN"
         suffix=" PLN"
-        decimalSeparator="."
+        decimalSeparator=","
         allowNegativeValue={false}
         step={1}
         min={0}
@@ -81,7 +81,7 @@ const PriceField: React.FC<PriceFieldProps> = ({
       />
       {showPriceWithTax && (
         <span className="field-price__tax">
-          {(field.value * 1.23).toFixed(2)} PLN (z VAT)
+          {(field.value * 1.23).toFixed(2).replace('.', ',')} PLN (z VAT)
         </span>
       )}
       {showPriceWithTipplyCommission && (

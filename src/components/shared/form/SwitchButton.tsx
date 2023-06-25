@@ -22,8 +22,8 @@ const SwitchButton = <T,>({
           key={`switch-button_${label}`}
           small
           disabled={disabled}
-          className={classNames({
-            'switch-button--is-active': fieldValue === value,
+          className={classNames('multi-switch__button', {
+            'multi-switch__button--is-active': fieldValue === value,
           })}
           type="button"
           onClick={() => onChange(value)}

@@ -80,6 +80,8 @@
     }
 
     &--recording {
+      background-color: #{$red}15 !important;
+
       &:after {
         opacity: 0;
       }
@@ -94,6 +96,24 @@
         }
         // border-color: #ff6464;
       }
+    }
+
+    &--pulse {
+      --r: 170;
+      --g: 74;
+      --b: 68;
+
+      &:hover {
+        &:after {
+          border-color: $red;
+        }
+      }
+
+      &:before {
+        opacity: 1;
+      }
+
+      @include pulse(var(--r), var(--g), var(--b));
     }
 
     &--remove {
@@ -144,7 +164,7 @@
         border-radius: 100%;
         border: 2px solid $white;
         opacity: 0;
-        transition: 0.2s opacity;
+        transition: 0.2s;
       }
 
       &:hover {
@@ -191,6 +211,7 @@
 
     &__state {
       p {
+        transition: 0.2s;
         min-height: 15px;
         color: #ababab;
         text-align: center;
@@ -199,11 +220,42 @@
       }
 
       &--recorded {
-          color: var(--user-color, #2BD283) !important;
+        color: var(--user-color, #2bd283) !important;
       }
 
       &--error {
-          color: #ff6464 !important;
+        color: #ff6464 !important;
+      }
+
+      &--shake {
+        animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+        transform: translate3d(0, 0, 0);
+        backface-visibility: hidden;
+        perspective: 1000px;
+        color: $red !important;
+
+        @keyframes shake {
+          10%,
+          90% {
+            transform: translate3d(-1px, 1px, 10px) scale(1.03);
+          }
+
+          20%,
+          80% {
+            transform: translate3d(2px, 1px, 10px) scale(1.02);
+          }
+
+          30%,
+          50%,
+          70% {
+            transform: translate3d(-4px, 0, 300px) scale(1.01);
+          }
+
+          40%,
+          60% {
+            transform: translate3d(4px, 0, 300px) scale(1);
+          }
+        }
       }
     }
   }

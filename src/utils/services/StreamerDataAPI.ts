@@ -21,8 +21,7 @@ export interface BestTipper {
 export type BestTiperTimeRange = 'today' | 'week' | 'month';
 
 const ZAIROX_DATA = {
-  userColor: { r: 170, g: 74, b: 68 },
-  name: 'Zairox',
+  name: 'ZairoxTV',
   description:
     'Siema jestem Marek mam 19 lat i prowdzę dla Was transmisje na żywo na których kocham grać w Fortnite, Minecraft, i w ogóle mega gry takie fajne zarąbistge ale nie mówcie o tym nikomu okok',
   avatarUrl:
@@ -95,7 +94,7 @@ const TESTER_DATA = {
 };
 
 const MICHAL_DATA = {
-  userColor: { r: 251, g: 206, b: 177 },
+  userColor: {r: 251, g: 206, b: 177},
   name: 'Michał Włodarczyk',
   description: 'Siema jestem Michal Włodarczyk i jestem z Łodzi.',
   avatarUrl:
@@ -112,9 +111,10 @@ export class StreamerDataAPI {
   private static mockRecords = sampleSize(MOCK_STREAMER_TIPS, 10);
 
   public static async getStreamerProfile(
-    profileName = 'zairox'
+    profileName: string
   ): Promise<StreamerProfile> {
     await sleep(1000);
+ 
     return ZAIROX_DATA;
 
     if (profileName.toLowerCase() === 'zairox') {
@@ -125,10 +125,7 @@ export class StreamerDataAPI {
       return TESTER_DATA;
     }
 
-    if (
-      profileName.toLowerCase() ===
-      'Micha%C5%82%20W%C5%82odarczyk'.toLowerCase()
-    ) {
+    if (profileName.toLowerCase() === 'Micha%C5%82%20W%C5%82odarczyk'.toLowerCase()) {
       return MICHAL_DATA;
     }
 
@@ -147,7 +144,7 @@ export class StreamerDataAPI {
       throw new Error('Pass profile name as string!');
     }
 
-    await sleep(5000);
+    await sleep(500);
 
     const dayInMillis = 24 * 60 * 60 * 1000;
     const weekInMillis = dayInMillis * 7;
@@ -194,7 +191,7 @@ export class StreamerDataAPI {
   }
 
   public static async lastStreamerTips(profileName: string) {
-    await sleep(2000);
+    await sleep(1000);
 
     if (typeof profileName !== 'string') {
       throw new Error('Pass profile name as string!');

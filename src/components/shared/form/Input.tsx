@@ -1,9 +1,7 @@
-import { InputHTMLAttributes, useState } from 'react';
-import { Field, FieldAttributes, useField } from 'formik';
 import classNames from 'classnames';
-import { Error } from './Error';
+import { Field, FieldAttributes, useField } from 'formik';
 import values from 'lodash/values';
-import { Popover } from 'react-tiny-popover';
+import { InputHTMLAttributes, useCallback, useState } from 'react';
 
 type InputProps = InputHTMLAttributes<HTMLInputElement>;
 type InputWithFieldProps = FieldAttributes<
@@ -26,6 +24,18 @@ export const Input = ({
   ...rest
 }: InputWithFieldProps) => {
   const [field, meta] = useField(name);
+  const [valueWasChangedByUser, setValueWasChangedByUser] = useState(false)
+
+  const handleOnChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    if (onChange) {
+      onChange(e);
+
+      return;
+    }
+
+    setValueWasChangedByUser(true);
+    field.onChange(e)
+  }, [])
 
   return (
     <div className="input__wrapper">
@@ -39,7 +49,8 @@ export const Input = ({
           'input--error':
             meta.touched && (values(meta.error).length > 0 || !field.value),
         })}
-        onChange={!onChange ? field.onChange : onChange}
+        onBlur={(valueWasChangedByUser || meta.touched) && field.onBlur}
+        onChange={handleOnChange}
       />
     </div>
   );

@@ -66,18 +66,15 @@ export const PaymentCreatorContextWrapper = ({
     for (const fieldToValidate of CREATOR_STEPS_FIELDS_FOR_VALIDATION[
       creatorStep
     ]) {
-      console.log({fieldToValidate, steps: CREATOR_STEPS_FIELDS_FOR_VALIDATION[creatorStep]})
       setFieldTouched(fieldToValidate, true, false);
       validateField(fieldToValidate);
     }
   }, [creatorStep, setFieldTouched, validateField]);
 
   const hasErrorsOnCurrentStep = useCallback(() => {
-    console.log({errors})
     validateCurrentStepFields();
 
     const hasErrors = some(entries(errors), ([key, value]) => {
-      console.log({key, value})
       if (!value && typeof touched[key] !== 'undefined' && touched[key]) {
         return false;
       }

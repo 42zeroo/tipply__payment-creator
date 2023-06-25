@@ -1,20 +1,25 @@
-.input, input {
-  padding: 22.672px 30px 16px;
+.input,
+input {
+  padding: 17px 30px 16px;
   padding-left: 30px;
   width: 100%;
   color: $white;
   border: 2px solid $hardBrown;
   background-color: #{$hardBrown}00;
   border-radius: 12px;
+  font-size: 13px;
 
-  @include respond-to('mobile') {
+  @include respond-to("mobile") {
+    font-size: 15px;
     border-radius: 14px;
     padding: 21.728px 42px;
   }
-  
-  &:focus, &:active, &--active {
+
+  &:focus,
+  &:active,
+  &--active {
     border-color: $white;
-    background-color: #{$hardBrown}30;
+    background-color: #{$hardBrown}15;
 
     animation: unset !important;
   }
@@ -42,21 +47,32 @@
       padding-top: 19.2px;
       padding-bottom: 40.4px;
 
-      &:focus-within, &:active, &--active {
+      textarea {
+        font-size: 13px;
+
+        @include respond-to("mobile") {
+          font-size: 15px;
+        }
+      }
+
+      &:focus-within,
+      &:active,
+      &--active {
         border-color: $white;
         background-color: #{$hardBrown}30;
       }
 
-      @include respond-to('mobile') {
+      @include respond-to("mobile") {
         padding-bottom: 50px;
         height: 275px;
+        font-size: 15px;
         padding-top: 22.4px;
       }
 
       &--long {
         height: 275px;
-  
-        @include respond-to('mobile') {
+
+        @include respond-to("mobile") {
           height: 296px;
         }
       }
@@ -72,7 +88,7 @@
       font-size: 10px;
       transition: font-weight 0.2s ease-in-out;
 
-      @include respond-to('mobile') {
+      @include respond-to("mobile") {
         left: 43.008px;
         font-size: 12px;
         bottom: 31.008px;
@@ -99,12 +115,6 @@
 
   &--error {
     border-color: $red;
-    background: rgba(71, 71, 71, 0.3);
-
-    --redR: 255;
-    --redG: 105;
-    --redB: 100;
-
-    @include pulse(var(--redR), var(--redG), var(--redB))
+    background: rgba(71, 71, 71, 0.15);
   }
 }

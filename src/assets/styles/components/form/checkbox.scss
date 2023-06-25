@@ -1,8 +1,16 @@
 .checkbox {
   transition: color 0.2s ease-in-out;
+  position: relative;
+
+  a {
+
+    font-weight: 500;
+      font-size: 12px;
+  }
+
   label {
     display: flex;
-    padding-bottom: 9px;
+    padding-bottom: 14px;
     position: relative;
     padding-left: 25px; /* Adjust as needed */
     cursor: pointer;
@@ -28,12 +36,14 @@
   }
 
   .label {
-    padding-left: 17px;
+    padding-left: 9px;
+    font-weight: 500;
+    font-size: 12px;
   }
 
   input:checked ~ .checkmark {
     background-color: $userColor;
-    border-color: $white; /* Customize the background color when checked */
+    border-color: $userColor;
   }
 
   .checkmark:after {

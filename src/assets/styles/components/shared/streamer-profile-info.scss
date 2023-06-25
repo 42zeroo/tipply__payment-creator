@@ -24,8 +24,8 @@
 
   &__avatar {
     position: relative;
-    padding-bottom: 16px;
-    
+    padding-bottom: 20px;
+
     p {
       width: 100%;
       text-align: center;
@@ -33,11 +33,11 @@
       font-family: Campton;
       user-select: none;
 
-      @include respond-to('mobile') {
+      @include respond-to("mobile") {
         font-size: 64px;
       }
 
-      & ~div {
+      & ~ div {
         background: $gray;
       }
     }
@@ -66,24 +66,35 @@
       width: 100%;
       height: 100%;
       object-position: center;
-      object-fit: cover;
+      object-fit: contain;
     }
 
     &--verified {
       right: 4.8px;
       bottom: 14.4px;
       position: absolute;
-      width: 40px;
-      height: 40px;
+      width: 30px;
+      height: 30px;
       border-radius: 100%;
       background-color: $userColor;
       display: grid;
       place-items: center;
       box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.35);
+      
+      
+      @include respond-to("mobile") {
+        width: 40px;
+        height: 40px;
+      }
 
       img {
-        width: 20px;
-        height: 14.864px;
+        width: 15px;
+        height: 15.561px;
+
+        @include respond-to("mobile") {
+          width: 25px;
+          height: 11.861px;
+        }
       }
     }
   }
@@ -102,18 +113,18 @@
 
   &__verified {
     padding-bottom: 2.4px;
-    padding-top: 5.6px;
+    padding-top: 4.5px;
   }
 
   &__socials {
     grid-template-columns: repeat(5, 1fr);
     display: flex;
     align-items: center;
-    padding-top: 13.6px;
+    padding-top: 10px;
     column-gap: 16px;
 
     img {
-      opacity: 0.5;
+      opacity: 0.6;
       filter: brightness(100);
       transition: opacity 0.2s ease-in-out;
 

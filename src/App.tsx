@@ -1,27 +1,27 @@
 import { Form, Formik, FormikValues } from 'formik';
 import omit from 'lodash/omit';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback } from 'react';
 import { toFormikValidationSchema } from 'zod-formik-adapter';
 
+import 'src/assets/styles/index.scss';
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
 import { PageWrapper } from './components/layout/PageWrapper';
 import { PaymentCreator } from './components/shared/PaymentCreator';
 import { StreamerProfileInfo } from './components/shared/StreamerProfileInfo';
 import { PaymentCreatorContextWrapper } from './utils/context/payment-creator-context';
 import { useStreamerData } from './utils/hooks/useStreamerData';
 import { PaymentCreatorSchema } from './utils/validation-schemas/payment-creator.schema';
-import 'src/assets/styles/index.scss';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/scrollbar';
-import 'swiper/css/effect-coverflow';
 
 export const App = () => {
   const { streamerProfileData, isDataLoading } = useStreamerData();
 
   const handleSubmit = useCallback(async (formikValues: FormikValues) => {
     alert("Formularz wyslany! Dane z formularza w konsoli.")
-    console.log('Wartości z formularza: ' + JSON.stringify(formikValues));
+    console.log('Wartości z formularza: ' + formikValues);
     
     return;
   }, []);

@@ -22,7 +22,7 @@ export const PredefinedPriceButton: React.FC<PredefinedPriceButtonProps> = ({
       type="button"
       onClick={onClick}
     >
-      {price.toFixed(2)} PLN
+      {price.toFixed(2).replace('.', ',')} PLN
     </Button>
   );
 };

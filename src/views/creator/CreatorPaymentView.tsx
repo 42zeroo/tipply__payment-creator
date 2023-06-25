@@ -240,7 +240,7 @@ export const CreatorPaymentView = () => {
                 initialSlide={findIndex(
                   chunk(streamerProfile?.predefinedPrices, 4),
                   (el) =>
-                    !!find(el, (price) => price.toFixed(2) === priceFieldValue)
+                    !!find(el, (price) => price.toFixed(2).replace('.', ',') === priceFieldValue)
                 )}
                 enabled
                 shortSwipes
@@ -255,7 +255,7 @@ export const CreatorPaymentView = () => {
                       key={price}
                       price={price}
                       isActive={
-                        price.toFixed(2) === priceFieldValue ||
+                        price.toFixed(2).replace('.', ',') === priceFieldValue ||
                         price.toFixed(1) === priceFieldValue ||
                         priceFieldValue?.toString() === price?.toString() ||
                         `${price}.` === priceFieldValue
@@ -278,6 +278,7 @@ export const CreatorPaymentView = () => {
         {map(PAYMENT_METHODS, ({ name, image, text }) => (
           <PaymentMethod
             key={name}
+            isZen={name === 'ZEN'}
             name={name}
             image={image}
             text={text}
@@ -326,10 +327,9 @@ export const CreatorPaymentView = () => {
       {streamerProfile && streamerProfile.allowRecord && (
         <Recorder
           name="audio_record"
-          disabled={parseFloat(priceFieldValue) < 20}
+          disabled={!isFinite(parseFloat(priceFieldValue)) || parseFloat(priceFieldValue) < 20}
         />
       )}
-
       <div
         className={classNames('creator-payment-view__agreements', {
           'creator-payment-view__agreements--extra-space-top':

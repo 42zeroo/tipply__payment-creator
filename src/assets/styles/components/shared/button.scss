@@ -25,24 +25,30 @@ btn {
         filter: brightness(0%);
         opacity: 0.5;
       }
+
+      .button--icon--always-visible {
+        opacity: 1 !important;
+      }
     }
   }
 
   &:hover {
-    color: $white;
     opacity: 1;
     @include pulse(var(--r), var(--g), var(--b));
 
-    .button--icon--right,
-    .button--icon--left,
-    .button--icon--reverse-color-icon {
-      filter: brightness(100%);
+    .button--icon {
       opacity: 1;
       width: 6%;
       max-width: 14px;
     }
 
+    .button--icon--always-visible {
+      opacity: 1 !important;
+    }
+
     .button--icon {
+      opacity: 0.5;
+
       &--right {
         margin-left: 10px;    
         
@@ -88,36 +94,50 @@ btn {
   }
 
   &--small {
-    padding: 11px 24px;
-  
-    @include respond-to("mobile") {
-      padding: 11px 24px;
-    }
+    padding: 12px 24px;
+    font-size: 12px;
+    line-height: 12px;
   }
 
   &--icon {
-    img {
-      object-fit: cover;
-    }
-
-    &--left {
-    transition: 0.4s;
-    width: 6%;
     max-width: 14px;
     margin: 0px;
     opacity: 0;
-  }
-  
-  &--right {
-    width: 6%;
-    max-width: 14px;
-      margin: 0px;
-      transition: 0.4s;
-      opacity: 0;
-    }
+    transition: 0.4s;
+
+      object-fit: cover;
+
+      min-width: 12.001px;
+      min-height: 9.919px;
+
+@include respond-to("mobile") {
+  min-width: 14.001px;
+  min-height: 11.919px;
+}
 
     &--reverse-color-icon {
       filter: brightness(1%);
+    }
+
+    &--always-visible {
+      width: 100% !important;
+      opacity: 1;
+  
+      &.button--icon--left {
+        margin-right: 12px !important;
+        
+        @include respond-to("mobile") {
+          margin-right: 16px !important;
+        }
+      }
+  
+      &.button--icon--right {
+        margin-left: 10px !important;    
+      
+        @include respond-to("mobile") {
+          margin-left: 13px !important;    
+        }
+      }
     }
   }
 }

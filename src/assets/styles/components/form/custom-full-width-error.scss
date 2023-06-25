@@ -13,12 +13,14 @@
     border-radius: 7px;
     width: 100%;
     color: #ff6464;
+    text-transform: uppercase;
     text-align: center;
-    padding: 12px 14px;
+    padding: 12px 14px 13px;
+    font-size: 10px;
+    font-weight: 800;
     
     @include respond-to('mobile') {
-      padding: 12px 44px;
-
+      font-size: 12px;
     }
   }
 

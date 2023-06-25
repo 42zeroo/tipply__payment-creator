@@ -5,6 +5,7 @@ type CustomButtonProps = {
   transparent?: boolean;
   semiTransparent?: boolean;
   small?: boolean;
+  showIconOnlyOnHover?: boolean;
   reverseButtonIconColor?: boolean;
   iconRight?: string;
   iconLeft?: string;
@@ -15,6 +16,7 @@ export const Button = ({
   transparent,
   semiTransparent,
   small,
+  showIconOnlyOnHover = true,
   children,
   reverseButtonIconColor,
   iconRight,
@@ -32,7 +34,9 @@ export const Button = ({
     >
       {iconLeft && (
         <img
-          className="button--icon--left"
+          className={classNames('button--icon', "button--icon--left", {
+            'button--icon--always-visible': !showIconOnlyOnHover
+          })}
           src={iconLeft}
           alt="button-left-icon"
         />
@@ -42,7 +46,7 @@ export const Button = ({
 
       {iconRight && (
         <img
-          className={classNames('button--icon--right', {
+          className={classNames('button--icon', 'button--icon--right', {
             'button--icon--reverse-color-icon': reverseButtonIconColor,
           })}
           src={iconRight}

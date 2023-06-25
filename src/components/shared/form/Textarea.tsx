@@ -1,7 +1,6 @@
 import { InputHTMLAttributes } from 'react';
 import { Field, FieldAttributes, useField } from 'formik';
 import classNames from 'classnames';
-import { Error } from './Error';
 import values from 'lodash/values';
 
 export const Textarea = ({
@@ -30,6 +29,7 @@ export const Textarea = ({
         className="input__textarea"
         {...props}
         {...field}
+        onBlur={(field.value || meta.touched) && field.onBlur}
       />
 
       {showLengthCounter && (

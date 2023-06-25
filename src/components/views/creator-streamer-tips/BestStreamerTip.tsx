@@ -32,7 +32,7 @@ export const BestStreamerTip: React.FC<BestTipProps> = ({
         <div className="streamer-tips__details">
           <span>{nickname}</span>
           <p className="streamer-tips__details__tip">
-            {sumOfTips.toFixed(2)} PLN
+            {sumOfTips.toFixed(2).replace('.', ',')} PLN
           </p>
         </div>
       </div>
