@@ -39,15 +39,15 @@ const PriceField: React.FC<PriceFieldProps> = ({
     },
     []
   );
-    const [isPriceFieldMaxLength, setIsPriceFieldMaxLength] = useState(true);
+  const [isPriceFieldMaxLength, setIsPriceFieldMaxLength] = useState(true);
   const handleValueChange = useCallback(
     (value?: string) => {
       if (value && value?.length > 5 && !value?.includes(',')) {
-        setIsPriceFieldMaxLength(true)
+        setIsPriceFieldMaxLength(true);
         return;
       }
 
-      setIsPriceFieldMaxLength(false)
+      setIsPriceFieldMaxLength(false);
       helpers.setValue(value, true);
       helpers.setTouched(true);
     },
@@ -55,37 +55,44 @@ const PriceField: React.FC<PriceFieldProps> = ({
   );
 
   const smsPlusAmountValue = useMemo(() => {
-    const smsPlusAmount = calculateSMSFullAmount(parseFloat(field.value)).toFixed(2).replace('.', ',');
+    const smsPlusAmount = calculateSMSFullAmount(parseFloat(field.value))
+      .toFixed(2)
+      .replace('.', ',');
 
     if (isNaN(parseFloat(smsPlusAmount))) {
-      return '0,00'
+      return '0,00';
     }
 
     return smsPlusAmount;
-  }, [calculateSMSFullAmount, field.value])
+  }, [calculateSMSFullAmount, field.value]);
 
   return (
-    <div className={classNames("field-price__wrapper", {
-      "field-price__wrapper--additional-fee": showPriceWithTax || showPriceWithTipplyCommission
-    })}>
+    <div
+      className={classNames('field-price__wrapper', {
+        'field-price__wrapper--additional-fee':
+          showPriceWithTax || showPriceWithTipplyCommission,
+      })}
+    >
       <CurrencyInput
         id={id}
         name={name}
         className={classNames('form-control', props.className, {
-          'input--filled': field?.value && field.value?.length && field.value.length > 0,
-          'input--error': meta.touched && (values(meta.error).length > 0 || !field.value)
+          'input--filled':
+            field?.value && field.value?.length && field.value.length > 0,
+          'input--error':
+            meta.touched && (values(meta.error).length > 0 || !field.value),
         })}
         value={field.value}
         onValueChange={handleValueChange}
         placeholder="0 PLN"
         suffix=" PLN"
         decimalSeparator=","
+        groupSeparator="."
         allowNegativeValue={false}
         maxLength={isPriceFieldMaxLength ? 6 : 8}
         max={99999.99}
         step={1}
         min={0}
-      
       />
       {showPriceWithTax && (
         <span className="field-price__tax">
