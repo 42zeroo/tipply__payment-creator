@@ -46,6 +46,8 @@ export const Textarea = ({
           {field?.value?.length ?? 0} / 255
         </div>
       )}
+
+      <div className="input__hover" />
     </div>
   );
 };

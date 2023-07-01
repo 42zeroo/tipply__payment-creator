@@ -15,19 +15,25 @@
     color: #ff6464;
     text-transform: uppercase;
     text-align: center;
-    padding: 12px 14px 13px;
+    padding: 8px 14px 9px;
     font-size: 10px;
     font-weight: 800;
     
     @include respond-to('mobile') {
+      padding: 12px 14px 14px;
       font-size: 12px;
     }
   }
 
   &--active {
-    margin-top: 32px;
-    height: 40.33px;
+    margin-top: 22px;
+    height: 30.33px;
     opacity: 1;
+    
+    @include respond-to('mobile') {
+      margin-top: 32px;
+      height: 40.33px;
+    }
 
     p {
       height: 100%;

@@ -76,6 +76,7 @@ export const WhereTipGoes: React.FC<WhereTipGoesProps> = ({
       </div>
       <p className="where-payment-goes__percent">
         <CountUp
+        duration={4.5}
           start={fillPercentFrom}
           end={
             isActive && parseFloat(field.value) > 0

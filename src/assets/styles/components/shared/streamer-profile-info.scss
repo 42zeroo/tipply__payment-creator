@@ -24,7 +24,11 @@
 
   &__avatar {
     position: relative;
-    padding-bottom: 20px;
+    padding-bottom: 28px;
+    
+    @include respond-to('mobile') {
+      padding-bottom: 20px;
+    }
 
     p {
       width: 100%;
@@ -70,8 +74,8 @@
     }
 
     &--verified {
-      right: 4.8px;
-      bottom: 14.4px;
+      right: -1.1999999999999993px;
+      bottom: 31.4px;
       position: absolute;
       width: 30px;
       height: 30px;
@@ -85,6 +89,8 @@
       @include respond-to("mobile") {
         width: 40px;
         height: 40px;
+        right: 4.8px;
+        bottom: 14.4px;
       }
 
       img {
@@ -120,8 +126,15 @@
     grid-template-columns: repeat(5, 1fr);
     display: flex;
     align-items: center;
-    padding-top: 10px;
-    column-gap: 16px;
+    padding-top: 8px;
+    padding-bottom: 16px;    
+    column-gap: 13px;
+    
+    @include respond-to("mobile") {
+      padding-bottom: 0px;    
+      padding-top: 10px;
+      column-gap: 16px;
+    }
 
     img {
       opacity: 0.6;

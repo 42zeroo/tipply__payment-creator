@@ -11,6 +11,14 @@
       }
     }
 
+    .input__hover {
+      &:before {
+        left: 17px;
+        border-radius: 61px;
+        width: calc(100% - 38px);
+      }
+    }
+
     &--additional-fee {
       input {
         padding-bottom: 22px;

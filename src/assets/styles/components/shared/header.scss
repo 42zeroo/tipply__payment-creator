@@ -9,11 +9,20 @@
     font-family: 'Sora';
     font-style: normal;
     font-weight: 800;
-    font-size: 12px;
-    line-height: 15px;
+    font-size: 10px;
+    line-height: 11px;
     color: $white;
     padding: 0;
     margin: 0;
+    white-space: pre-wrap;
+    text-align: center;
+    
+    @include respond-to('mobile') {
+      text-align: normal;
+      white-space: normal;
+      line-height: 15px;
+      font-size: 12px;
+    }
 
     &:last-of-type {
       color: $hardBrown;

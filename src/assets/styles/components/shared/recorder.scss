@@ -37,6 +37,10 @@
         opacity: 1;
       }
     }
+
+    &--recording {
+      @include pulse(var(--r), var(--g), var(--b));
+    }
   }
 
   &__button {
@@ -66,7 +70,19 @@
       }
     }
 
+    &--play {
+      img {
+        width: 10px;
+        height: 12px;
+      }
+    }
+
     &--record {
+      img {
+        width: 12px;
+        height: 12px;
+      }
+
       &:before {
         content: "";
         position: absolute;
@@ -145,16 +161,25 @@
     justify-content: center;
     display: flex;
     padding-bottom: 16px;
-    column-gap: 9px;
+    column-gap: 7px;
+
+    @include respond-to('mobile') {
+      column-gap: 9px;
+    }
 
     button {
       width: 46px;
-      position: relative;
       height: 46px;
+      position: relative;
       border-radius: 100%;
       background: rgba(71, 71, 71, 0.15);
       display: grid;
       place-items: center;
+      
+      @include respond-to('mobile') {
+        width: 39px;
+        height: 39px;
+      }
 
       &:after {
         content: "";
@@ -189,23 +214,32 @@
 
     p {
       color: $white;
-      font-size: 16px;
+      font-size: 14px;
       margin: 0;
       padding: 0;
       font-weight: 800;
+      
+      @include respond-to('mobile') {
+        font-size: 16px;
+      }
     }
 
     &--small {
-      padding-top: 12px;
-      padding-bottom: 13px;
-
+      padding-top: 15px;
+      padding-bottom: 22px;
+      
       p {
+        line-height: 120%;
         padding: 0;
         margin: 0;
         color: $hardBrown;
         text-align: center;
-        font-size: 12px;
+        font-size: 10px;
         font-weight: 800;
+        
+        @include respond-to('mobile') {
+          font-size: 12px;
+        }
       }
     }
 

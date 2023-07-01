@@ -19,12 +19,17 @@ body {
 
 
 button,
+a,
 input,
 select,
-textarea {
+textarea,
+div {
+  -webkit-tap-highlight-color: transparent; /* remove tap highlight */
+
   &:focus,
   &:hover {
     outline: none;
+    box-shadow: none; /* remove box shadow */
   }
 
   cursor: pointer;

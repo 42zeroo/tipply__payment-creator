@@ -52,6 +52,7 @@ export const Input = ({
         onBlur={(valueWasChangedByUser || meta.touched) && field.onBlur}
         onChange={handleOnChange}
       />
+      <div className="input__hover" />
     </div>
   );
 };

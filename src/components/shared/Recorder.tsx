@@ -13,7 +13,7 @@ interface RecorderProps {
   disabled?: boolean;
 }
 
-const MAX_RECORDING_TIME = 20000;
+const MAX_RECORDING_TIME = 15000;
 
 const blobToBase64String = (blob: Blob) => {
   return new Promise<string>((resolve, reject) => {
@@ -362,13 +362,14 @@ export const Recorder = ({ disabled, name }: RecorderProps) => {
           {
             '--record-duration-percentage': `${
               ((recording ? elapsedRecordTime : elapsedTime) /
-                (recording ? 20 * 1000 : recordTime)) *
+                (recording ? MAX_RECORDING_TIME : recordTime)) *
               100
             }%`,
           } as React.CSSProperties
         }
         className={classNames('recorder__wrapper', {
           'recorder__wrapper--active': recording || !!audioSrc,
+          'recorder__wrapper--recording': recording
         })}
       >
         {renderButtons()}

@@ -20,55 +20,66 @@ export const App = () => {
   const { streamerProfileData, isDataLoading } = useStreamerData();
 
   const handleSubmit = useCallback(async (formikValues: FormikValues) => {
-    alert("Formularz wyslany! Dane z formularza w konsoli.")
+    alert('Formularz wyslany! Dane z formularza w konsoli.');
     console.log('Wartości z formularza: ' + formikValues);
-    
+
     return;
   }, []);
 
-
   return (
-    <PageWrapper backgroundImageUrl={streamerProfileData?.backgroundImageUrl}>
-      {isDataLoading ? (
-        <div className="loader">[2 sec] Wczytywanie danych profilu streamera...</div>
-      ) : (
-        <>
-          <StreamerProfileInfo
-            {...omit(streamerProfileData, ['description'])}
-          />
+    <>
+      <head>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1"
+        />
+      </head>
+      <PageWrapper backgroundImageUrl={streamerProfileData?.backgroundImageUrl}>
+        {isDataLoading ? (
+          <div className="loader">
+            [2 sec] Wczytywanie danych profilu streamera...
+          </div>
+        ) : (
+          <>
+            <StreamerProfileInfo
+              {...omit(streamerProfileData, ['description'])}
+            />
 
-          <Formik
-            validateOnMount
-            validateOnChange
-            validateOnBlur
-            onSubmit={handleSubmit}
-            validationSchema={toFormikValidationSchema(PaymentCreatorSchema)}
-            initialValues={{
-              message: '',
-              email: '',
-              nickname: '',
+            <Formik
+              validateOnMount
+              validateOnChange
+              validateOnBlur
+              onSubmit={handleSubmit}
+              validationSchema={toFormikValidationSchema(PaymentCreatorSchema)}
+              initialValues={{
+                message: '',
+                email: '',
+                nickname: '',
 
-              price: '',
-              payment_method: '',
-              where_tip_goes: streamerProfileData?.whereTipsGoes ? '' : 'UNAVAILABLE',
-              
-              setValue: null,
+                price: '',
+                payment_method: '',
+                where_tip_goes: streamerProfileData?.whereTipsGoes
+                  ? ''
+                  : 'UNAVAILABLE',
 
-              all_agreements: false,
-              agreement_message: false,
-              agreement_main: false,
-            }}
-          >
-            <Form >
-              <PaymentCreatorContextWrapper
-                streamerProfile={streamerProfileData}
-              >
-                <PaymentCreator />
-              </PaymentCreatorContextWrapper>
-            </Form>
-          </Formik>
-        </>
-      )}
-    </PageWrapper>
+                setValue: null,
+
+                all_agreements: false,
+                agreement_message: false,
+                agreement_main: false,
+              }}
+            >
+              <Form>
+                <PaymentCreatorContextWrapper
+                  streamerProfile={streamerProfileData}
+                >
+                  <PaymentCreator />
+                </PaymentCreatorContextWrapper>
+              </Form>
+            </Formik>
+          </>
+        )}
+      </PageWrapper>
+    </>
   );
 };

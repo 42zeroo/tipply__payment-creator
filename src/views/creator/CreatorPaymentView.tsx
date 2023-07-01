@@ -296,7 +296,7 @@ export const CreatorPaymentView = () => {
       {streamerProfile && streamerProfile.whereTipsGoes && (
         <>
           <Header
-            title="DOKONAJ WYBORU, GDZIE POWIĘDRUJE KWOTA"
+            title={`DOKONAJ WYBORU, \nGDZIE POWIĘDRUJE KWOTA`}
             subtitle="PRZEMYŚL TO DWA RAZY!"
           />
           <div className="creator-payment-view__where-payment-goes">

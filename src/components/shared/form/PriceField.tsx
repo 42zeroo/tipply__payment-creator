@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { FieldHookConfig, useField } from 'formik';
 import { values } from 'lodash';
 import round from 'lodash/round';
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import CurrencyInput, { CurrencyInputProps } from 'react-currency-input-field';
 
 type PriceFieldProps = FieldHookConfig<string> &
@@ -39,9 +39,15 @@ const PriceField: React.FC<PriceFieldProps> = ({
     },
     []
   );
-
+    const [isPriceFieldMaxLength, setIsPriceFieldMaxLength] = useState(true);
   const handleValueChange = useCallback(
     (value?: string) => {
+      if (value && value?.length > 5 && !value?.includes(',')) {
+        setIsPriceFieldMaxLength(true)
+        return;
+      }
+
+      setIsPriceFieldMaxLength(false)
       helpers.setValue(value, true);
       helpers.setTouched(true);
     },
@@ -75,6 +81,8 @@ const PriceField: React.FC<PriceFieldProps> = ({
         suffix=" PLN"
         decimalSeparator=","
         allowNegativeValue={false}
+        maxLength={isPriceFieldMaxLength ? 6 : 8}
+        max={99999.99}
         step={1}
         min={0}
       
@@ -89,6 +97,7 @@ const PriceField: React.FC<PriceFieldProps> = ({
           {smsPlusAmountValue} PLN (z VAT i prowizją)
         </span>
       )}
+      <div className="input__hover" />
     </div>
   );
 };
