@@ -2,6 +2,7 @@ import homeIcon from '../../assets/icons/home.svg'
 import userIcon from '../../assets/icons/user.svg'
 import logo from '../../assets/logo.svg'
 import { Button } from '../shared/Button';
+import { Logo } from './Logo';
 
 export const Navbar = () => {
   return (
@@ -13,7 +14,7 @@ export const Navbar = () => {
 
         <div className="navbar__logo">
           <a href="https://tipply.pl">
-            <img src={logo} alt='home_icon' />
+            <Logo />
           </a>
         </div>
 

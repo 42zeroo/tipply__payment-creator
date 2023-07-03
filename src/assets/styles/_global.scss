@@ -1,12 +1,13 @@
 * {
   box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-smooth: always;
+  text-rendering: optimizeLegibility;
 }
 
 html,
 body {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
 
   padding: 0;
   margin: 0;
@@ -22,17 +23,15 @@ button,
 a,
 input,
 select,
-textarea,
-div {
+textarea {
   -webkit-tap-highlight-color: transparent; /* remove tap highlight */
+  cursor: pointer;
 
   &:focus,
   &:hover {
     outline: none;
     box-shadow: none; /* remove box shadow */
   }
-
-  cursor: pointer;
 }
 
 button[data-rmiz-btn-close] {

@@ -25,9 +25,8 @@ export const MultiSwitch: React.FC<MultiSwitchProps> = ({
   selectedSwitch = 0,
   disabled,
   activeIndex,
-  fontWeight = 'bold',
   onToggleCallback,
-  eachSwitchWidth = 98,
+  eachSwitchWidth = 102.08,
 }) => {
   const [currentSwitch, setCurrentSwitch] = useState(selectedSwitch);
 
@@ -39,15 +38,14 @@ export const MultiSwitch: React.FC<MultiSwitchProps> = ({
 
   const noOfSwitches = texts.length || 2;
   const switchWidth = noOfSwitches * eachSwitchWidth;
-  const switchStyles = {
-    width: `${switchWidth}px`,
-  };
+  // const switchStyles = {
+  //   width: `${switchWidth}px`,
+  // };
   const labelWidth = `${eachSwitchWidth || switchWidth / noOfSwitches}px`;
 
   const switches = texts.map((_, index) => {
     const labelStyles = {
       width: labelWidth,
-      fontWeight,
     };
     let classSwitchContent = 'multi-switch-content';
 
@@ -81,7 +79,7 @@ export const MultiSwitch: React.FC<MultiSwitchProps> = ({
 
   const classNameHandle = 'multi-switch-handle multi-switch-handle-move';
   return (
-    <div className="multi-switch-container" style={switchStyles}>
+    <div className="multi-switch-container" style={{}}>
       {switches}
       <span className={classNameHandle} style={switchHandleStyles}></span>
     </div>

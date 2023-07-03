@@ -82,6 +82,11 @@ btn {
   &--transparent {
     color: $hardBrown;
     background: transparent;
+    overflow: visible;
+
+    .button--icon {
+      opacity: 0.3 !important;
+    }
 
     &:hover {
       animation: unset !important;
@@ -112,10 +117,10 @@ btn {
     margin: 0px;
     opacity: 0;
     transition: 0.4s;
-    object-fit: cover;
     width: 0;
     height: 100%;
-
+    object-fit: contain;
+    
     &--reverse-color-icon {
       filter: brightness(1%);
     }

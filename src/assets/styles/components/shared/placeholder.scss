@@ -18,6 +18,7 @@
     background-image: -webkit-linear-gradient(to left, rgba(35, 36, 36, 0.05), rgba(35, 36, 36, 0.3), rgba(35, 36, 36, 0.6), rgba(35, 36, 36, 0.3), rgba(35, 36, 36, 0.05));
     animation: loading 1s infinite;
     z-index: 45;
+    transform: translateX(0);
   }
 }
 

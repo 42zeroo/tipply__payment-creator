@@ -52,6 +52,7 @@
     transform: translateX(-14px);
     
     @include respond-to("mobile") {
+      // padding: 0 14px;
       margin-top: 17px;
       transform: unset;
       width: calc(100%);
@@ -61,7 +62,7 @@
       position: absolute;
       top:  0;
       left: 0;
-      right: 0;
+      right: 1px;
       bottom: 0;
       content: '';
       display: block;
@@ -75,7 +76,7 @@
       pointer-events: none;
       position: absolute;
       top:0;
-      left: 0;
+      left: 1px;
       right: 0;
       bottom: 0;
       content: '';
@@ -126,6 +127,7 @@
       padding: 10px 15px 8px !important;
       margin-bottom: 1px;
       white-space: nowrap;
+      margin: 0 4px;
 
       &:before {
         content: "";

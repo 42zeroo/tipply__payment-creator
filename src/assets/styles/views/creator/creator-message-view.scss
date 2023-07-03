@@ -32,4 +32,27 @@
     place-items: center;
     padding-bottom: 30px;
   }
+
+  &__textarea-emoji {
+    position: absolute;
+    background: transparent;
+    border: unset;
+    right: 43px;
+    bottom: 31px;
+    padding: 0;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: 0.2s ease-in-out;
+      filter: brightness(100%);
+    }
+    
+    &:hover {
+      img {
+        filter: brightness(200%);
+      }
+    }
+  }
 }

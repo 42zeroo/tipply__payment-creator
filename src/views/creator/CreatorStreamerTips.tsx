@@ -2,7 +2,7 @@ import findIndex from 'lodash/findIndex';
 import { useCallback, useContext, useState } from 'react';
 import arrowLeft from 'src/assets/icons/arrow-left.svg';
 import { Button } from 'src/components/shared/Button';
-import { MultiSwitch } from 'src/components/shared/form/MultiSwitch';
+import { MultiSwitch } from 'src/components/shared/form/MultiSwitch2';
 import { BestStreamerTipsSection } from 'src/components/views/creator-streamer-tips/BestStreamerTipsSection';
 import { LastStreamerTipsSection } from 'src/components/views/creator-streamer-tips/LastStreamerTipsSection';
 import { PaymentCreatorContext } from 'src/utils/context/payment-creator-context';
@@ -73,16 +73,15 @@ export const CreatorStreamerTips = () => {
 
       <div className="streamer-tips__time-range">
         <MultiSwitch
-          disabled={isBestTipperLoading}
-          texts={['DZISIAJ', 'TYDZIEŃ', 'MIESIĄC']}
+          // itemWidth={'auto'} 
+          // disabled={isBestTipperLoading}
+          options={['DZISIAJ', 'TYDZIEŃ', 'MIESIĄC']}
           activeIndex={findIndex(switchButtonValues, ({value}) => value === bestTipperSearchRange)}
           onToggleCallback={(index) =>
             setBestTipperSearchRange(switchButtonValues[index].value)
           }
-          selectedSwitch={findIndex(switchButtonValues, ({value}) => value === bestTipperSearchRange)}
         />
       </div>
-
       <BestStreamerTipsSection
         bestTippers={bestTippers}
         isBestTipperLoading={isBestTipperLoading}

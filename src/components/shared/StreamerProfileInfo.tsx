@@ -11,6 +11,7 @@ import {
   StreamerProfileSocials,
 } from 'src/utils/entity/StreamerProfile';
 import SocialLink from './SocialLink';
+import { Checkmark } from '../layout/Checkmark';
 
 export const StreamerProfileInfo = ({
   name,
@@ -106,7 +107,7 @@ export const StreamerProfileInfo = ({
             setIsPopoverOpen(!isPopoverOpen)
           }
           className="streamer-profile-info__avatar--verified">
-            <img src={checkMarkWhite} alt="check_mark-white" />
+            <Checkmark />
           </div>
           
         </Popover>

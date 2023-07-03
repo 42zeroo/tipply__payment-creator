@@ -4,7 +4,7 @@ import { Button } from 'src/components/shared/Button';
 export interface PredefinedPriceButtonProps {
   price: number;
   isActive: boolean;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 export const PredefinedPriceButton: React.FC<PredefinedPriceButtonProps> = ({

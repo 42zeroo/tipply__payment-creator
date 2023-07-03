@@ -1,10 +1,11 @@
 import classNames from 'classnames';
 import { useField, useFormikContext } from 'formik';
-import { chunk, find, findIndex } from 'lodash';
+import { find, findIndex } from 'lodash';
 import map from 'lodash/map';
-import { useCallback, useMemo, useRef } from 'react';
-import arrowRight from 'src/assets/icons/arrow-right.svg';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import Slider from 'react-slick';
 import arrowLeft from 'src/assets/icons/arrow-left.svg';
+import arrowRight from 'src/assets/icons/arrow-right.svg';
 import { Button } from 'src/components/shared/Button';
 import { Recorder } from 'src/components/shared/Recorder';
 import { Checkbox } from 'src/components/shared/form/Checkbox';
@@ -17,12 +18,11 @@ import { WhereTipGoes } from 'src/components/views/creator-payment-view/WhereTip
 import { PAYMENT_METHODS } from 'src/utils/const/payment-methods';
 import { usePaymentCreatorContext } from 'src/utils/hooks/usePaymentCreatorContext';
 import { useScrollToClassNameIf } from 'src/utils/hooks/useScrollToClassNameIf';
-import { Swiper, SwiperSlide } from 'swiper/react';
 
 export const CreatorPaymentView = () => {
   const { changeCreatorStep, streamerProfile, hasErrorsOnCurrentStep } =
     usePaymentCreatorContext();
-  const { submitForm } = useFormikContext();
+  const { submitForm, values, errors, touched } = useFormikContext();
 
   const goBackToCreatorMessageView = useCallback(
     () => changeCreatorStep('CreatorMessageView', false),
@@ -34,6 +34,11 @@ export const CreatorPaymentView = () => {
   const [
     { value: priceFieldValue },
     { error: fieldPriceError, touched: fieldPriceTouched },
+    {
+      setValue: setPriceFieldValue,
+      setTouched: setPriceFieldTouched,
+      setError: setPriceFieldError,
+    },
   ] = useField('price');
   const [
     { value: paymentMethodValue },
@@ -157,20 +162,25 @@ export const CreatorPaymentView = () => {
 
   const scrollToClassNameIf = useScrollToClassNameIf(containerRef);
 
-  const submit = useCallback(() => {
-    const hasErrors = hasErrorsOnCurrentStep();
+  const submit = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+      e.preventDefault();
 
-    if (hasErrors) {
-      scrollToClassNameIf(scrollToFieldWithErrorData);
-    } else {
-      submitForm();
-    }
-  }, [
-    submitForm,
-    hasErrorsOnCurrentStep,
-    scrollToClassNameIf,
-    scrollToFieldWithErrorData,
-  ]);
+      const hasErrors = hasErrorsOnCurrentStep();
+
+      if (hasErrors) {
+        scrollToClassNameIf(scrollToFieldWithErrorData);
+      } else {
+        submitForm();
+      }
+    },
+    [
+      submitForm,
+      hasErrorsOnCurrentStep,
+      scrollToClassNameIf,
+      scrollToFieldWithErrorData,
+    ]
+  );
 
   const handlePaymentMethodChange = useCallback(
     (name: string) => {
@@ -200,6 +210,70 @@ export const CreatorPaymentView = () => {
     [whereTipGoesValue, setWhereTipGoesValue, setWhereTipGoesTouched]
   );
 
+  useEffect(() => {
+    const predefinedPrices = (streamerProfile?.predefinedPrices &&
+      streamerProfile.predefinedPrices) ?? [1, 2, 3, 4, 5];
+    const priceValue = parseFloat(
+      typeof priceFieldValue === 'string'
+        ? priceFieldValue.replace(',', '.')
+        : priceFieldValue
+    );
+
+    const maxValueOfCurrentPaymentMethod =
+      find(
+        PAYMENT_METHODS,
+        (paymentMethod) => paymentMethod.name === paymentMethodValue
+      )?.max ?? 25000;
+
+    if (!isNaN(priceValue) && priceValue > maxValueOfCurrentPaymentMethod) {
+      console.log('zmieniam cos')
+      setPriceFieldValue(maxValueOfCurrentPaymentMethod?.toFixed(2), false);
+      setPriceFieldTouched(true, false);
+      setPriceFieldError(undefined);
+    }
+
+    if (
+      paymentMethodValue === 'SMS' &&
+      (!priceFieldValue || !predefinedPrices.includes(priceValue))
+    ) {
+      console.log('zmieniam cos 2')
+
+      setPriceFieldValue(
+        predefinedPrices[0].toFixed(2).replace('.', ','),
+        false
+      );
+      setPriceFieldTouched(true, false);
+      setPriceFieldError(undefined);
+    }
+  }, [
+    streamerProfile?.predefinedPrices,
+    setPriceFieldValue,
+    priceFieldValue,
+    paymentMethodValue,
+    setPriceFieldTouched,
+  ]);
+
+  const sliderRef = useRef<Slider>(null);
+
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    if (
+      streamerProfile?.predefinedPrices &&
+      streamerProfile.predefinedPrices.includes(
+        parseFloat(priceFieldValue?.replace(',', '.') ?? '0')
+      )
+    ) {
+      sliderRef.current?.slickGoTo(
+        findIndex(
+          streamerProfile.predefinedPrices,
+          (price) =>
+            price === parseFloat(priceFieldValue?.replace(',', '.') ?? '0')
+        )
+      );
+    }
+  }, [priceFieldValue, streamerProfile?.predefinedPrices]);
+
   return (
     <div className="creator-payment-view__container" ref={containerRef}>
       <div className="creator-payment-view__price">
@@ -213,6 +287,9 @@ export const CreatorPaymentView = () => {
             name="price"
             id="price"
             placeholder="price"
+            predefinedPrices={
+              streamerProfile?.predefinedPrices ?? [1, 2, 3, 4, 5]
+            }
             showPriceWithTax={paymentMethodValue === 'SMS_PLUS'}
             showPriceWithTipplyCommission={paymentMethodValue === 'SMS_FULL'}
           />
@@ -225,45 +302,56 @@ export const CreatorPaymentView = () => {
             </div>
 
             <div className="creator-payment-view__predefined-price">
-              <Swiper
-                parallax
-                spaceBetween="9px"
-                slidesPerView={
-                  chunk(streamerProfile.predefinedPrices, 4).length > 1
-                    ? 4.2
-                    : 4
-                }
-                keyboard={{
-                  enabled: true,
+              <Slider
+                afterChange={(currentSlide) => setCurrentSlide(currentSlide)}
+                ref={sliderRef}
+                {...{
+                  className: 'slider variable-width',
+                  initialSlide:
+                    streamerProfile.predefinedPrices.length > 4
+                      ? Math.floor(streamerProfile.predefinedPrices.length / 2)
+                      : 1,
+                  infinite: false,
+                  arrows: false,
+                  dots: false,
+                  centerMode: streamerProfile.predefinedPrices.length > 4,
+                  slidesToScroll: 1,
+                  variableWidth: true,
                 }}
-                freeMode
-                initialSlide={findIndex(
-                  chunk(streamerProfile?.predefinedPrices, 4),
-                  (el) =>
-                    !!find(el, (price) => price.toFixed(2).replace('.', ',') === priceFieldValue)
-                )}
-                enabled
-                shortSwipes
-                longSwipes
-                mousewheel
               >
                 {map(streamerProfile.predefinedPrices, (price) => (
-                  <SwiperSlide>
-                    <PredefinedPriceSwiperComponent
-                      priceFieldName="price"
-                      predefinedPrices={streamerProfile?.predefinedPrices ?? []}
-                      key={price}
-                      price={price}
-                      isActive={
-                        price.toFixed(2).replace('.', ',') === priceFieldValue ||
-                        price.toFixed(1) === priceFieldValue ||
-                        priceFieldValue?.toString() === price?.toString() ||
-                        `${price}.` === priceFieldValue
+                  <PredefinedPriceSwiperComponent
+                    priceFieldName="price"
+                    predefinedPrices={streamerProfile?.predefinedPrices ?? []}
+                    key={price}
+                    price={price}
+                    isActive={
+                      price.toFixed(2).replace('.', ',') === priceFieldValue ||
+                      price.toFixed(1) === priceFieldValue ||
+                      priceFieldValue?.toString() === price?.toString() ||
+                      `${price}.` === priceFieldValue
+                    }
+                    onClick={() => {
+                      if (
+                        priceFieldValue !== price.toFixed(2).replace('.', ',')
+                      ) {
+                        setPriceFieldValue(price.toFixed(2).replace('.', ','));
                       }
-                    />
-                  </SwiperSlide>
+
+                      const slideIndexOfClickedPredefinedPrice = findIndex(
+                        streamerProfile.predefinedPrices,
+                        (predefinedPrice) => price === predefinedPrice
+                      );
+
+                      if (currentSlide !== slideIndexOfClickedPredefinedPrice) {
+                        sliderRef.current?.slickGoTo(
+                          slideIndexOfClickedPredefinedPrice
+                        );
+                      }
+                    }}
+                  />
                 ))}
-              </Swiper>
+              </Slider>
             </div>
           </>
         )}
@@ -327,7 +415,10 @@ export const CreatorPaymentView = () => {
       {streamerProfile && streamerProfile.allowRecord && (
         <Recorder
           name="audio_record"
-          disabled={!isFinite(parseFloat(priceFieldValue)) || parseFloat(priceFieldValue) < 20}
+          disabled={
+            !isFinite(parseFloat(priceFieldValue)) ||
+            parseFloat(priceFieldValue) < 20
+          }
         />
       )}
       <div

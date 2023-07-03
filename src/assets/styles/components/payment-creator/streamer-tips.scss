@@ -15,7 +15,17 @@
   &__header {
     white-space: pre-line;
     display: flex;
+    max-width: 250px;
     align-items: center;
+    
+    @include respond-to('mobile') {
+      max-width: 290px;
+    }
+
+    p {
+      text-align: start !important;
+      white-space: normal !important;
+    }
 
     img {
       object-fit: cover;
@@ -25,7 +35,12 @@
 
     div {
       align-items: flex-start;
-      padding-left: 23px;
+      padding-left: 16px;
+      
+      @include respond-to('mobile') {
+        padding-left: 23px;
+
+      }
     }
   }
 
@@ -227,6 +242,10 @@
     width: 100%;
     row-gap: 8px;
     padding-bottom: 48px;
+
+    @include respond-to('mobile') {
+
+    }
   }
 
   &__last-tip {

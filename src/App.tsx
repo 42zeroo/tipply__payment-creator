@@ -9,6 +9,8 @@ import 'swiper/css/effect-coverflow';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
 import { PageWrapper } from './components/layout/PageWrapper';
 import { PaymentCreator } from './components/shared/PaymentCreator';
 import { StreamerProfileInfo } from './components/shared/StreamerProfileInfo';
@@ -52,17 +54,15 @@ export const App = () => {
               onSubmit={handleSubmit}
               validationSchema={toFormikValidationSchema(PaymentCreatorSchema)}
               initialValues={{
-                message: '',
-                email: '',
-                nickname: '',
+                message: 'asd',
+                email: 'asd@asd.pl',
+                nickname: 'asd',
 
-                price: '',
+                price: undefined,
                 payment_method: '',
                 where_tip_goes: streamerProfileData?.whereTipsGoes
                   ? ''
                   : 'UNAVAILABLE',
-
-                setValue: null,
 
                 all_agreements: false,
                 agreement_message: false,

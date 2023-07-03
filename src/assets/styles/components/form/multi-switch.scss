@@ -1,16 +1,13 @@
 .multi-switch {
  
   &-container {
-    display: inline-block;
     height: 30px;
     padding: 2px;
     border-radius: 2px;
-    width: 200px;
     margin: 0 auto;
     border-radius: 30px;
     position: relative;
     display: flex;
-    width: 750px;
     border-width: 0.1rem;
     border-color: black;
     height: 50px;
@@ -66,6 +63,7 @@
     width: 100%;
     font-size: 12px;
     height: 25px;
+    z-index: -1;
     line-height: 30px;
     cursor: pointer;
     background-color: $userColor !important;

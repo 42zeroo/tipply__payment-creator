@@ -11,6 +11,7 @@ interface FieldWrapperProps {
   textarea?: boolean;
   name: string;
   showError?: boolean;
+  onMouseLeave?: React.MouseEventHandler<HTMLDivElement>;
 }
 
 export const FieldWrapper = ({
@@ -19,6 +20,7 @@ export const FieldWrapper = ({
   textarea,
   name,
   showError = true,
+  onMouseLeave
 }: FieldWrapperProps) => {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const [, { error, touched }] = useField(name);
@@ -31,7 +33,7 @@ export const FieldWrapper = ({
   const nodeRef = useRef(null);
 
   return (
-    <div className="field-wrapper__error-wrapper">
+    <div className="field-wrapper__error-wrapper" onMouseLeave={onMouseLeave}>
       <label className="field-wrapper">
         <span className="field-wrapper__label">{label}</span>
         {children}
