@@ -154,7 +154,7 @@ const PriceField: React.FC<PriceFieldProps> = ({
         placeholder="0 PLN"
         suffix=" PLN"
         decimalSeparator=","
-        groupSeparator=""
+        groupSeparator=" "
         allowNegativeValue={false}
         disabled={paymentMethod?.name === 'SMS'}
         maxLength={isPriceFieldMaxLength ? 6 : 8}
