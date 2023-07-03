@@ -116,7 +116,10 @@ const PriceField: React.FC<PriceFieldProps> = ({
       <CurrencyInput
         id={id}
         onChange={(e) => {
-          const value = e.target.value.replace(' ', '').replace('PLN', '').replace(',', '.');
+          const value = e.target.value
+            .replace(' ', '')
+            .replace('PLN', '')
+            .replace(',', '.');
           if (
             value &&
             value?.length > (paymentMethod?.maxDigitsLimit ?? 5) &&
@@ -125,13 +128,19 @@ const PriceField: React.FC<PriceFieldProps> = ({
             setIsPriceFieldMaxLength(true);
             return;
           }
-    
+
           setIsPriceFieldMaxLength(false);
-    
+
           helpers.setValue(value, true);
           helpers.setTouched(true, true);
-          console.log({e, v: e.target.value.replace(' ', '').replace('PLN', '').replace(',', '.')})
-          console.log('capture')
+          console.log({
+            e,
+            v: e.target.value
+              .replace(' ', '')
+              .replace('PLN', '')
+              .replace(',', '.'),
+          });
+          console.log('capture');
         }}
         name={name}
         className={classNames('form-control', props.className, {
@@ -145,6 +154,7 @@ const PriceField: React.FC<PriceFieldProps> = ({
         placeholder="0 PLN"
         suffix=" PLN"
         decimalSeparator=","
+        groupSeparator=""
         allowNegativeValue={false}
         disabled={paymentMethod?.name === 'SMS'}
         maxLength={isPriceFieldMaxLength ? 6 : 8}
@@ -163,7 +173,7 @@ const PriceField: React.FC<PriceFieldProps> = ({
         </span>
       )}
       <div className="input__hover" />
-      
+
       <Popover
         isOpen={isPopoverOpen}
         containerClassName="field-wrapper__error-wrapper__container"
@@ -200,9 +210,13 @@ const PriceField: React.FC<PriceFieldProps> = ({
           className={classNames('form-error__triangle', {
             'form-error__triangle--show': !!meta.error && meta.touched,
           })}
-          onMouseEnter={() => !!meta.error && meta.touched && setIsPopoverOpen(true)}
+          onMouseEnter={() =>
+            !!meta.error && meta.touched && setIsPopoverOpen(true)
+          }
           onMouseLeave={() => setIsPopoverOpen(false)}
-          onClick={() => !!meta.error && meta.touched && setIsPopoverOpen(!isPopoverOpen)}
+          onClick={() =>
+            !!meta.error && meta.touched && setIsPopoverOpen(!isPopoverOpen)
+          }
         >
           <img src={warningTriangle} alt="warning-triangle" />
         </div>
