@@ -15,7 +15,7 @@ import {
 } from 'src/utils/services/StreamerDataAPI';
 
 export const CreatorStreamerTips = () => {
-  const { changeCreatorStep } = usePaymentCreatorContext();
+  const { changeCreatorStep, setCreatorStepTransition } = usePaymentCreatorContext();
   const { streamerProfile } = useContext(PaymentCreatorContext);
 
   if (!streamerProfile) {
@@ -23,8 +23,11 @@ export const CreatorStreamerTips = () => {
   }
 
   const goBackToCreatorMessageView = useCallback(
-    () => changeCreatorStep('CreatorMessageView', false),
-    [changeCreatorStep]
+    async () => {
+      await setCreatorStepTransition('fade')
+      changeCreatorStep('CreatorMessageView', false);
+    },
+    [changeCreatorStep, setCreatorStepTransition]
   );
 
   const [bestTipperSearchRange, setBestTipperSearchRange] =

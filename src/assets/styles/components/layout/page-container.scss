@@ -2,6 +2,7 @@
   z-index: 1;
   position: relative;
   margin: 0 auto;
+  overflow: hidden;
   padding: 78px 0 48px;
   border-radius: 15px;
   backdrop-filter: blur(5px);
@@ -12,6 +13,8 @@
   border: 1px solid #{$hardBrown}30;
   max-width: 401px;
   min-width: 361px;
+  height: 100%;
+  transition: height 5s ease-in-out;
   
   @include respond-to('mobile') {
     padding: 150px 0 110px 0;

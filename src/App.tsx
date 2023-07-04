@@ -22,8 +22,9 @@ export const App = () => {
   const { streamerProfileData, isDataLoading } = useStreamerData();
 
   const handleSubmit = useCallback(async (formikValues: FormikValues) => {
+    formikValues = {...formikValues, price: parseFloat(formikValues.price.replace(',', '.'))}
     alert('Formularz wyslany! Dane z formularza w konsoli.');
-    console.log('Wartości z formularza: ' + formikValues);
+    console.log('Wartości z formularza: ', formikValues);
 
     return;
   }, []);

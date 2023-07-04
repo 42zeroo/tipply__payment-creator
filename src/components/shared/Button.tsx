@@ -30,19 +30,22 @@ export const Button = ({
         'button--transparent': transparent,
         'button--semi-transparent': semiTransparent,
         'button--small': small,
+        'button__icon-wrapper': iconLeft || iconRight,
+        'button__icon-wrapper--left': iconLeft,
+        'button__icon-wrapper--right': iconRight,
       })}
     >
       {iconLeft && (
         <img
-          className={classNames('button--icon', "button--icon--left", {
-            'button--icon--always-visible': !showIconOnlyOnHover
+          className={classNames('button--icon', 'button--icon--left', {
+            'button--icon--always-visible': !showIconOnlyOnHover,
           })}
           src={iconLeft}
           alt="button-left-icon"
         />
       )}
 
-      {children}
+      <span>{children}</span>
 
       {iconRight && (
         <img

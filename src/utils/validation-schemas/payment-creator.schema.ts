@@ -6,12 +6,12 @@ export const PaymentCreatorSchema = z.object({
   nickname: z.string({ required_error: "Dlaczego to jest puste?" }).min(3, 'Jaja se robisz? Wiecej niż 3 znaki już'),
 
   price: z.string({ required_error: 'Kwota nie może być pusta!' }).superRefine((value, ctx) => {
-    if (!parseFloat(value)) {
+    if (!parseFloat(value.replace(',', '.'))) {
       ctx.addIssue({ path: ['price'], code: 'not_finite' })
       return false;
     }
     
-    if (parseFloat(value) <= 0) {
+    if (parseFloat(value.replace(',', '.')) <= 0) {
       ctx.addIssue({ path: ['price'], code: 'too_small', minimum: 0.01, inclusive: false, type: 'number' })
       return false;
     }

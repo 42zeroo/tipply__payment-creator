@@ -23,6 +23,11 @@
       width: calc(100% - 38px);
     }
 
+    .form-error__triangle--show {
+      top: calc(50% + 2.5px);
+      right: 48px;
+    }
+
     &--additional-fee {
       input {
         padding-bottom: 22px;
@@ -44,6 +49,8 @@
       }
     }
   }
+
+  
 
   &__tax {
     font-weight: 600;

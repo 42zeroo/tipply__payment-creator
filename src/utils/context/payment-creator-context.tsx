@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { CreatorMessageView } from 'src/views/creator/CreatorMessageView';
 import { CreatorPaymentView } from 'src/views/creator/CreatorPaymentView';
 import { StreamerProfile } from '../entity/StreamerProfile';
@@ -36,18 +36,22 @@ type PaymentCreatorContextProps = {
   CurrentCreatorStepComponent: () => JSX.Element;
   hasErrorsOnCurrentStep: () => boolean;
   streamerProfile: StreamerProfile | null;
+  creatorStepTransition: 'slide-right' | 'slide-left' | 'fade';
+  setCreatorStepTransition: React.Dispatch<React.SetStateAction<"fade" | "slide-right" | "slide-left">>;
 };
 
 export const PaymentCreatorContext =
   React.createContext<PaymentCreatorContextProps>({
     creatorStep: 'CreatorMessageView',
     hasErrorsOnCurrentStep: () => false,
+    setCreatorStepTransition: () => false,
     changeCreatorStep: (
       _: keyof typeof CREATOR_STEPS_COMPONENTS,
       __?: boolean
     ) => false,
     CurrentCreatorStepComponent: CreatorMessageView,
     streamerProfile: null,
+    creatorStepTransition: 'fade'
   });
 
 export const PaymentCreatorContextWrapper = ({
@@ -100,13 +104,17 @@ export const PaymentCreatorContextWrapper = ({
     [hasErrorsOnCurrentStep, setCreatorStep]
   );
 
+  const [creatorStepTransition, setCreatorStepTransition] = useState<'fade' | 'slide-right' | 'slide-left'>('slide-left')
+
   return (
     <PaymentCreatorContext.Provider
       value={{
         streamerProfile,
         creatorStep,
         changeCreatorStep,
+        creatorStepTransition,
         hasErrorsOnCurrentStep,
+        setCreatorStepTransition,
         CurrentCreatorStepComponent: CREATOR_STEPS_COMPONENTS[creatorStep],
       }}
     >

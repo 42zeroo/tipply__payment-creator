@@ -2,23 +2,32 @@
 btn {
   padding: 14.4px 49.6px;
   background: $userColor;
-  color: #{$black}80;
-  font-weight: 800;
   border-radius: 46px;
   border: none;
-  text-decoration: none;
-  text-transform: uppercase;
   white-space: nowrap;
   transition: 0.3s;
+
+  span {
+    color: #{$black}80;
+    font-weight: 800;
+    text-decoration: none;
+    display: inline-block;
+    transition: 0.3s;
+    position: relative;
+    text-transform: uppercase;
+  }
 
   &:disabled {
     background-color: $gray;
 
     &:hover {
-      color: #{$black}75;
       cursor: not-allowed;
       opacity: 1;
-
+      
+      span {
+        color: #{$black}75;
+      }
+      
       .button--icon--right,
       .button--icon--left,
       .button--icon--reverse-color-icon {
@@ -38,8 +47,7 @@ btn {
 
     .button--icon {
       opacity: 1;
-      width: 6%;
-      max-width: 14px;
+      transform: scale(1);
     }
 
     .button--icon--always-visible {
@@ -48,19 +56,12 @@ btn {
 
     .button--icon {
       opacity: 0.5;
-      width: 12.001px;
-      height: 9.919px;
-  
-      @include respond-to("mobile") {
-        width: 14.001px;
-        height: 11.919px;
-      }
 
       &--right {
-        margin-left: 10px;
+        transform: scale(1) translateX(10px);
 
         @include respond-to("mobile") {
-          margin-left: 13px;
+          transform: scale(1) translateX(13px);
         }
       }
 
@@ -74,15 +75,35 @@ btn {
     }
   }
 
+  &__icon-wrapper {
+    &--right {
+      &:hover {
+        span {
+          transform: translateX(-5px);
+        }
+      }
+    }
+    &--left {
+      &:hover {
+        span {
+          transform: translateX(5px);
+        }
+      }
+    }
+  }
+
   @include respond-to("mobile") {
     border-radius: 50px;
     padding: 16px 32px;
   }
 
   &--transparent {
-    color: $hardBrown;
     background: transparent;
     overflow: visible;
+    
+    span {
+      color: $hardBrown;
+    }
 
     .button--icon {
       opacity: 0.3 !important;
@@ -97,12 +118,19 @@ btn {
     background: rgba(71, 71, 71, 0.15);
     border: 0.0625rem solid $hardBrown;
     border-radius: 49px;
-    color: #ababab;
     max-height: 37.33px;
     
+    span {
+      color: #ababab;
+    }
+
     &:hover {
       animation: unset;
-      background: rgba(71, 71, 71, 0.30);
+      background: rgba(71, 71, 71, 0.3);
+
+      span {
+        transition: unset;
+      }
     }
   }
 
@@ -117,22 +145,25 @@ btn {
     margin: 0px;
     opacity: 0;
     transition: 0.4s;
-    width: 0;
+    width: 100%;
     height: 100%;
     object-fit: contain;
-    
+    transform: scale(0);
+
     &--reverse-color-icon {
       filter: brightness(1%);
     }
 
     &--always-visible {
+      transform: scale(1) !important;
       width: 100% !important;
       opacity: 1;
 
       &.button--icon--left {
-        margin-right: 12px !important;
-
+        transform: translateX(-12px) !important;
+        
         @include respond-to("mobile") {
+          transform: translateX(-16px) !important;
           margin-right: 16px !important;
         }
       }

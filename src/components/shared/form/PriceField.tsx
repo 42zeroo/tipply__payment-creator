@@ -1,6 +1,6 @@
 import classNames from 'classnames';
-import { ErrorMessage, FieldHookConfig, useField } from 'formik';
-import { find, isNaN, values } from 'lodash';
+import { FieldHookConfig, useField, useFormikContext } from 'formik';
+import { find, isNaN } from 'lodash';
 import round from 'lodash/round';
 import React, {
   useCallback,
@@ -22,7 +22,6 @@ type PriceFieldProps = FieldHookConfig<string> &
     showPriceWithTax?: boolean;
     showPriceWithTipplyCommission?: boolean;
     paymentMethodFieldName?: string;
-    predefinedPrices: number[];
     name: string;
   };
 
@@ -32,7 +31,6 @@ const PriceField: React.FC<PriceFieldProps> = ({
   name,
   showPriceWithTax,
   showPriceWithTipplyCommission,
-  predefinedPrices,
   paymentMethodFieldName = 'payment_method',
   ...props
 }) => {
@@ -65,6 +63,7 @@ const PriceField: React.FC<PriceFieldProps> = ({
   );
 
   const [isPriceFieldMaxLength, setIsPriceFieldMaxLength] = useState(true);
+  const { handleBlur, handleChange } = useFormikContext();
 
   const handleValueChange = useCallback(
     (value?: string) => {
@@ -79,6 +78,7 @@ const PriceField: React.FC<PriceFieldProps> = ({
 
       setIsPriceFieldMaxLength(false);
 
+      handleChange(name);
       helpers.setValue(value, true);
       helpers.setTouched(true, true);
     },
@@ -115,46 +115,20 @@ const PriceField: React.FC<PriceFieldProps> = ({
     >
       <CurrencyInput
         id={id}
-        onChange={(e) => {
-          const value = e.target.value
-            .replace(' ', '')
-            .replace('PLN', '')
-            .replace(',', '.');
-          if (
-            value &&
-            value?.length > (paymentMethod?.maxDigitsLimit ?? 5) &&
-            !value?.includes(',')
-          ) {
-            setIsPriceFieldMaxLength(true);
-            return;
-          }
-
-          setIsPriceFieldMaxLength(false);
-
-          helpers.setValue(value, true);
-          helpers.setTouched(true, true);
-          console.log({
-            e,
-            v: e.target.value
-              .replace(' ', '')
-              .replace('PLN', '')
-              .replace(',', '.'),
-          });
-          console.log('capture');
-        }}
         name={name}
         className={classNames('form-control', props.className, {
           'input--filled':
             field?.value && field.value?.length && field.value.length > 0,
-          'input--error':
-            meta.touched && (values(meta.error).length > 0 || !field.value),
+          'input--error': meta.touched && (!field.value || field.value === '0'),
         })}
         value={field.value}
-        // onValueChange={handleValueChange}
+        onValueChange={handleValueChange}
+        onBlur={handleBlur}
         placeholder="0 PLN"
+        onChangeCapture={handleChange}
         suffix=" PLN"
         decimalSeparator=","
-        disableGroupSeparators={true}
+        disableGroupSeparators
         allowNegativeValue={false}
         disabled={paymentMethod?.name === 'SMS'}
         maxLength={isPriceFieldMaxLength ? 6 : 8}
@@ -199,23 +173,21 @@ const PriceField: React.FC<PriceFieldProps> = ({
               timeout={200}
               classNames="fade"
             >
-              <div ref={nodeRef}>
-                <ErrorMessage name={name} />
-              </div>
+              <div ref={nodeRef}>Kwota nie może być pusta!</div>
             </CSSTransition>
           </ArrowContainer>
         )}
       >
         <div
           className={classNames('form-error__triangle', {
-            'form-error__triangle--show': !!meta.error && meta.touched,
+            'form-error__triangle--show': meta.touched && (!field.value || field.value === '0'),
           })}
           onMouseEnter={() =>
-            !!meta.error && meta.touched && setIsPopoverOpen(true)
+            meta.touched && (!field.value || field.value === '0') && setIsPopoverOpen(true)
           }
           onMouseLeave={() => setIsPopoverOpen(false)}
           onClick={() =>
-            !!meta.error && meta.touched && setIsPopoverOpen(!isPopoverOpen)
+            meta.touched && (!field.value || field.value === '0') && setIsPopoverOpen(!isPopoverOpen)
           }
         >
           <img src={warningTriangle} alt="warning-triangle" />

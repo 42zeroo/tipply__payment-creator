@@ -12,24 +12,26 @@ import { usePaymentCreatorContext } from 'src/utils/hooks/usePaymentCreatorConte
 import { useScrollIntoElement } from 'src/utils/hooks/useScrollIntoElement';
 
 export const CreatorMessageView = () => {
-  const { streamerProfile, changeCreatorStep, creatorStep } =
+  const { streamerProfile, changeCreatorStep, creatorStep, setCreatorStepTransition } =
     usePaymentCreatorContext();
 
   const containerRef = useRef<HTMLDivElement>(null);
 
   const { scrollIntoRef } = useScrollIntoElement(containerRef);
 
-  const goToCreatorPaymentView = useCallback(() => {
+  const goToCreatorPaymentView = useCallback(async () => {
+    await setCreatorStepTransition('slide-left')
     const canSwitchCreatorStep = changeCreatorStep('CreatorPaymentView');
 
     if (!canSwitchCreatorStep) {
       scrollIntoRef();
     }
-  }, [changeCreatorStep, creatorStep]);
+  }, [changeCreatorStep, creatorStep, setCreatorStepTransition]);
 
-  const goToCreatorStreamerTips = useCallback(() => {
+  const goToCreatorStreamerTips = useCallback(async () => {
+    await setCreatorStepTransition('fade')
     changeCreatorStep('CreatorStreamerTips', false);
-  }, [changeCreatorStep]);
+  }, [changeCreatorStep, setCreatorStepTransition]);
 
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 

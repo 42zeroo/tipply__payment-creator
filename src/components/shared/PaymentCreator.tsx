@@ -2,7 +2,7 @@ import { usePaymentCreatorContext } from 'src/utils/hooks/usePaymentCreatorConte
 import { SwitchTransition, CSSTransition } from 'react-transition-group';
 
 export const PaymentCreator = () => {
-  const { CurrentCreatorStepComponent, creatorStep } =
+  const { CurrentCreatorStepComponent, creatorStep, creatorStepTransition } =
     usePaymentCreatorContext();
 
   return (
@@ -10,10 +10,11 @@ export const PaymentCreator = () => {
       <SwitchTransition>
         <CSSTransition
           key={creatorStep}
+          timeout={300}
           addEndListener={(node, done) =>
             node.addEventListener('transitionend', done, false)
           }
-          classNames="fade"
+          classNames={creatorStepTransition}
         >
           <CurrentCreatorStepComponent />
         </CSSTransition>

@@ -15,10 +15,13 @@
     text-align: center;
 
     button {
-      padding: 5px 22px;
+      padding: 5px 22px 4px;
       background: transparent;
-      color: #ABABAB;
       transition: color 0.2s ease-in-out;
+
+      span {
+        color: #ABABAB;
+      }
   
       &:disabled {
         background-color: transparent;
@@ -46,14 +49,17 @@
     font-size: 12px;
     font-weight: bold;
     line-height: 30px;
-    color: #000;
     text-align: center;
     cursor: pointer;
     position: inherit;
     z-index: 10;
     transition: color 0.75s cubic-bezier(0, 1, 0, 0);
     will-change: transform;
-    animation: switch-handle-color 0.5s;
+    
+    span {
+      animation: switch-handle-color 0.5s;
+      color: #000;
+    }
   }
 
   &-handle {
@@ -76,15 +82,21 @@
   }
 
   &__button {
-    transition: color 1s ease-in-out;
+    span {
+      transition: color 1s ease-in-out;
+    }
 
     &--is-active {
-      color: rgba(0, 0, 0, 0.50) !important;
+      span {
+        color: rgba(0, 0, 0, 0.50) !important;
+      }
       
       button {
         &:disabled {
           &:hover {
-            color: rgba(0, 0, 0, 0.50) !important;
+            span {
+              color: rgba(0, 0, 0, 0.50) !important;
+            }
 
           }
         }

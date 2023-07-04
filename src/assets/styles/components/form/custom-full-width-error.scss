@@ -1,9 +1,14 @@
 .custom-full-width-error {
   margin-top: 0;
-  height: 1px;
+  height: 30.33px;
   transition-property: height, opacity;
   transition: 0.4s ease-in-out;
   opacity: 0;
+  transform: scale(0%);
+
+  @include respond-to('mobile') {
+    height: 40.33px;
+  }
 
   p {
     height: 50%;
@@ -27,12 +32,11 @@
 
   &--active {
     margin-top: 22px;
-    height: 30.33px;
     opacity: 1;
+    transform: scale(100%);
     
     @include respond-to('mobile') {
       margin-top: 32px;
-      height: 40.33px;
     }
 
     p {
