@@ -26,7 +26,8 @@ const ZAIROX_DATA = {
     'Siema jestem Marek mam 19 lat i prowdzę dla Was transmisje na żywo na których kocham grać w Fortnite, Minecraft, i w ogóle mega gry takie fajne zarąbistge ale nie mówcie o tym nikomu okok',
   avatarUrl:
     'https://lh3.googleusercontent.com/a-/AOh14Gi8NKAj067mF0hQltzk3-StFiEBO16W9U2UuDCuwQ=s96-c',
-  backgroundImageUrl: 'https://gaming.komputronik.pl/wp-content/uploads/2022/12/kody-do-star-stable.jpg',
+  backgroundImageUrl:
+    'https://gaming.komputronik.pl/wp-content/uploads/2022/12/kody-do-star-stable.jpg',
   // backgroundImageUrl: 'https://i.ibb.co/Wpfmb35/image-1.png',
   // backgroundImageUrl: 'https://i.ibb.co/F3yRzbn/xd.png',
   isVerified: true,
@@ -94,7 +95,7 @@ const TESTER_DATA = {
 };
 
 const MICHAL_DATA = {
-  userColor: {r: 251, g: 206, b: 177},
+  userColor: { r: 251, g: 206, b: 177 },
   name: 'Michał Włodarczyk',
   description: 'Siema jestem Michal Włodarczyk i jestem z Łodzi.',
   avatarUrl:
@@ -114,8 +115,8 @@ export class StreamerDataAPI {
     profileName: string
   ): Promise<StreamerProfile> {
     await sleep(1000);
- 
-    // return ZAIROX_DATA;
+
+    return ZAIROX_DATA;
 
     if (profileName.toLowerCase() === 'zairox') {
       return ZAIROX_DATA;
@@ -125,7 +126,10 @@ export class StreamerDataAPI {
       return TESTER_DATA;
     }
 
-    if (profileName.toLowerCase() === 'Micha%C5%82%20W%C5%82odarczyk'.toLowerCase()) {
+    if (
+      profileName.toLowerCase() ===
+      'Micha%C5%82%20W%C5%82odarczyk'.toLowerCase()
+    ) {
       return MICHAL_DATA;
     }
 
